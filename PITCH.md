@@ -61,10 +61,4 @@ Para mantenernos fuera de territorio regulado y enfocarnos en la relación:
 - No diagnosticamos ni hacemos evaluaciones de riesgo que disparen acciones automáticas.
 - No emitimos facturas fiscales; recolectamos y exportamos los datos.
 
-## Próximos pasos
-
-- **Validar con profesionales:** entrevistas directas con psicólogos en México y Argentina, y revisar grupos de Facebook y foros donde comparten sus problemas.
-- **Construir el núcleo:** canal con encuadre, espacio compartido por sesión y seguimiento psicométrico.
-- **Piloto:** un grupo pequeño de terapeutas en México midiendo mensajes fuera de horario, inasistencias y tiempo administrativo antes y después.
-
 *Nota sobre los datos: algunas cifras vienen de proveedores (por ejemplo, el 70% de médicos que atiende por WhatsApp, citado por Leona) y deben tomarse como orientativas. La más sólida es el 79% de FUNSALUD.*

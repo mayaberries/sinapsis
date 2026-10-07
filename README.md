@@ -2,6 +2,30 @@
 
 Sinapis - Spanish for synapse -  is a project aimed to create a platform that helps health professionals to organize their work with patients and clients. The idea is to have Zoom/Meet like features but tailored to the health practice. Thus this should solve the different challenges a professional might face when giving remote consultations with generic tools like the forementioned or others like Whatsapp.
 
+## Pain points
+
+From `RESEARCH.md`:
+
+- WhatsApp is the real consulting room: bookings, reschedules, lab photos, voice notes and "quick questions" arrive at any hour, eroding the practitioner's rest and boundaries.
+- For therapists, after-hours contact is clinical, not just admin; the contact policy should be part of the therapeutic frame ("encuadre"), but generic tools can't hold it.
+- Remote sessions have no frame: no waiting room tied to the appointment, no time awareness, no structured opening or closing.
+- Unstable connections and mobile-only patients, often with low digital literacy, make installs, accounts and desktop links a barrier.
+- Patients lack privacy at home (or join from cars) and hold back; therapists working from home face their own interruptions.
+- Crisis moments have no plan: no emergency contact or local resources at hand, and no way to reconnect when a call drops.
+- Couples, family, group and child work don't fit one face per tile.
+- Video fatigue: back-to-back sessions, missing nonverbal cues and self-view wear practitioners out.
+- Information is fragmented: questionnaires via Google Forms scored by hand, results in spreadsheets, documents buried in chats, invoicing data (CFDI) chased after each session.
+- Even purpose-built tools mean too many clicks, calendars that don't sync and jumping between apps.
+
+From practitioner conversations:
+
+- Workshops (talleres), not just one-on-one sessions, are a common format.
+- Sessions often rely on support material like images or slides, and it has to run without lagging.
+- Screen sharing in Zoom fails often, breaking sessions that depend on that material.
+- Patients are afraid to tap options that look too small or too formal, and get stressed about pressing the wrong thing.
+- Practitioners can't easily guide them: "press the green button" works, "press the two dots below the chat" leaves them lost. Bigger, clearer controls with simple icons or drawings would help.
+- The patient-facing page should look visibly simpler and less serious, so patients lose their fear of sharing things online.
+
 ## Entities
 
 The entities this platform will englobe can be divided between the users and the resources/artifacts they'll share between them:

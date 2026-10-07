@@ -1,0 +1,9 @@
+# Obsidian: keep the vault config (.obsidian/*.json, plugins, themes, snippets)
+# but not per-user, per-device UI state or caches.
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
+
+# OS
+.DS_Store
