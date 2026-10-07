@@ -25,6 +25,7 @@ From practitioner conversations:
 - Patients are afraid to tap options that look too small or too formal, and get stressed about pressing the wrong thing.
 - Practitioners can't easily guide them: "press the green button" works, "press the two dots below the chat" leaves them lost. Bigger, clearer controls with simple icons or drawings would help.
 - The patient-facing page should look visibly simpler and less serious, so patients lose their fear of sharing things online.
+- Finding files mid-session is stressful when time is short. Practitioners want a folder in the platform where they upload images, videos and PDFs ahead of time, so they can share them in a click ("here's this book", "let's watch this video") without digging through their computer.
 
 ## Entities
 
