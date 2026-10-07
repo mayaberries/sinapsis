@@ -1,6 +1,6 @@
 # Sinapsis: roadmap
 
-Borrador basado en `PITCH.md` y `RESEARCH.md`. Las fases siguen el orden de prioridad de la investigación: primero validar, luego resolver lo que más duele a psicólogos y terapeutas en México y Latinoamérica, y al final expandir a Estados Unidos. No tiene fechas todavía; cada fase avanza cuando cumple sus criterios de salida.
+Borrador basado en `assets/es/PITCH.md` y `assets/es/RESEARCH.md`. Las fases siguen el orden de prioridad de la investigación: primero validar, luego resolver lo que más duele a psicólogos y terapeutas en México y Latinoamérica, y al final expandir a Estados Unidos. No tiene fechas todavía; cada fase avanza cuando cumple sus criterios de salida.
 
 ## Principios que aplican a todas las fases
 

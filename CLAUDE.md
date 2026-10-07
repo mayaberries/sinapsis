@@ -7,7 +7,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Sinapsis ("synapse" in Spanish) is at the pre-code stage. The repo contains only documentation:
 
 - `README.md`: product vision and core entities.
-- `RESEARCH.md`: practitioner pain-point research and a prioritized feature list (Tier 1–3). Treat it as the product spec until a real one exists.
+- `assets/{en,es}/RESEARCH.md`: practitioner pain-point research and a prioritized feature list (Tier 1–3). Treat it as the product spec until a real one exists.
+- `assets/{en,es}/PITCH.md`: product pitch.
+- `docs/ROADMAP.md`: phased roadmap (Spanish).
+
+`assets/en` and `assets/es` hold the same documents in English and Spanish; when one changes, update its counterpart. The repo is also an Obsidian vault (`.obsidian/` config is tracked, workspace state is not).
 
 There is no build system, language, framework, or test suite yet. When one is added, update this file with build/lint/test commands, including how to run a single test.
 
@@ -17,7 +21,7 @@ A platform for health practitioners (psychologists and therapists first, then do
 
 - **Target markets:** Mexico and Latin America first, US second. Expect Spanish-first UX and mobile-first, low-bandwidth patients (low-end Android, unstable connections, no installs or accounts).
 - **Core entities:** the practitioner, the patient/client, and the *resources* exchanged between them: finished artifacts such as already-issued prescriptions, lab results, psychometric results, worksheets and reports.
-- **Tier 1 features (RESEARCH.md):** a boundaried messaging channel ("encuadre" channel) with office hours and response windows; a per-appointment before/during/after shared space; psychometric follow-up (PHQ-9, GAD-7 and similar public-domain instruments) with auto-scoring and trends; mobile-first joining with audio-only fallback; privacy-at-home helpers for patients.
+- **Tier 1 features (assets/en/RESEARCH.md):** a boundaried messaging channel ("encuadre" channel) with office hours and response windows; a per-appointment before/during/after shared space; psychometric follow-up (PHQ-9, GAD-7 and similar public-domain instruments) with auto-scoring and trends; mobile-first joining with audio-only fallback; privacy-at-home helpers for patients.
 - **Integrations:** patients prefer WhatsApp and other messaging apps. Integrations should automate common tasks (e.g., sending results via WhatsApp) without making the practitioner manage those channels by hand.
 
 ## Scope constraints (out of scope by design)

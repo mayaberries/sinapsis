@@ -4,7 +4,7 @@ Sinapis - Spanish for synapse -  is a project aimed to create a platform that he
 
 ## Pain points
 
-From `RESEARCH.md`:
+From `assets/en/RESEARCH.md`:
 
 - WhatsApp is the real consulting room: bookings, reschedules, lab photos, voice notes and "quick questions" arrive at any hour, eroding the practitioner's rest and boundaries.
 - For therapists, after-hours contact is clinical, not just admin; the contact policy should be part of the therapeutic frame ("encuadre"), but generic tools can't hold it.
