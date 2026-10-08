@@ -2,54 +2,100 @@
 
 ## Summary
 
-Sinapsis is the digital consulting room for health professionals, starting with psychologists and therapists in Mexico and Latin America. It brings together in one place what today is scattered across WhatsApp, Zoom/Meet, Google Forms, email and spreadsheets: sessions, messages with the patient, questionnaires and documents. All within the frame ("encuadre") the practitioner defines.
+Sinapsis is the digital consulting room for health professionals. It brings together in one place what today is scattered across WhatsApp, Zoom/Meet, Google Forms, email and spreadsheets: sessions, messages with the patient, questionnaires and documents. All within the frame ("encuadre") the practitioner defines.
 
-The problem isn't video quality. It's that generic tools weren't designed around the therapeutic frame, so practitioners have to rebuild it by hand every day.
+The platform is designed for psychologists and therapists in private practice in Mexico and Latin America. This first stage focuses on **online workshops**, since they make up most of your online practice. This document describes what the pilot includes, how each part works, what it offers for in-person practice and what we will measure.
 
-## The problem
+## What we aim to solve
 
-- **WhatsApp became the consulting room.** In Mexico, 79% of doctors use instant messaging with their patients, and only 32% use specialized video-consultation platforms at least once a week (FUNSALUD). Bookings, reschedules, photos of lab results, voice notes, payment proofs and "quick questions" arrive at any hour.
-- **The "invisible load" wears practitioners down.** A typical practice receives 30 to 60 non-therapy messages a week, and rescheduling an appointment takes 6 to 10 messages (vendor estimates). Replying after hours signals that limits are flexible.
-- **In psychology, the cost is clinical.** Some late-night messages are driven by the patient's attachment needs. The contact policy should be part of the therapeutic contract, but WhatsApp offers no way to uphold it.
-- **Remote sessions have no frame.** There's no waiting room tied to the appointment, no time management, and no structured opening or closing. Unstable connections and lack of privacy at the patient's home interrupt the most delicate moments.
-- **Information is fragmented.** Questionnaires (PHQ-9, GAD-7) are sent through Google Forms and scored by hand; lab results get buried in the chat; invoicing details are chased over WhatsApp after each session.
+**In workshops:**
 
-## Market
+- **A group doesn't fit in a grid of faces.** Generic tools are built for meetings, not for leading a group: there's no speaking-turn view and no way to talk privately with one participant without interrupting the rest.
+- **Support material fails.** Screen sharing in Zoom fails often, and images or slides lag right when the session depends on them. Looking for files mid-session takes time.
+- **Participants are afraid of making mistakes.** Small or overly formal-looking options stress them out. Instructions like "press the green button" work; "press the two dots below the chat" don't. With a group, every doubt multiplies.
+- **Group privacy.** If a participant doesn't use headphones, whoever is in their home hears what the others share.
+- **Unstable connections.** In a survey of 491 mental-health professionals in Latin America, the main difficulties were technology (dropped signal, frozen video, incoming calls) and domestic interruptions. Many participants only have a phone.
 
-- **Priority 1: Mexico and Latin America.** WhatsApp is the default channel, many patients only have a phone, and connections are unstable. In a survey of 491 mental-health professionals in the region, 92.9% delivered care online and 91.5% worked from home; their main difficulties were technology and domestic interruptions.
-- **Priority 2: United States.** Psychologists mostly work hybrid (65% according to APA, December 2025). They already use telehealth platforms but complain about switching between apps, calendars that don't sync, and the limits of video for couples, families and children.
-- **The baseline already exists** (waiting room, fixed link, no downloads). The difference lies in the relationship and the workflow, not the video.
+**In practice overall:**
 
-## The solution
+- **WhatsApp as the consulting room.** In Mexico, 79% of doctors use instant messaging with their patients, and only 32% use specialized video-consultation platforms at least once a week (FUNSALUD). Bookings, changes, payment proofs and questions arrive at any hour.
+- **Invisible load.** A typical practice receives 30 to 60 non-therapy messages a week, and rescheduling an appointment takes 6 to 10 messages (vendor estimates). Replying after hours signals that limits are flexible.
+- **Clinical cost.** Some late-night messages are driven by the patient's attachment needs. The contact policy should be part of the therapeutic contract, but WhatsApp offers no way to uphold it.
+- **Fatigue.** Around 60% of 422 respondents reported video-call fatigue; self-view and back-to-back sessions contribute.
+- **Fragmented information.** Questionnaires (PHQ-9, GAD-7) are sent through Google Forms and scored by hand; lab results get buried in the chat; CFDI invoicing details and bank-transfer screenshots are requested over WhatsApp after each session.
 
-Sinapsis organizes the practice around the people involved in it:
+## What we know so far
 
-- **The practitioner**, who defines their frame: office hours, response time, auto-reply and an emergency path.
-- **The patient**, who joins from their phone without installing anything or creating accounts, with a profile that stores their usual location, emergency contact and invoicing details.
-- **Other participants** (partners, family, caregivers, groups, supervisors or interpreters) when the session calls for it.
-- **Each appointment**, by video, audio only or in person, with a shared space for before, during and after.
-- **The resources** that come out of the relationship: already-issued prescriptions, lab results, reports, worksheets and receipts, organized per patient.
+- **Workshops are a common format**, not just one-on-one sessions, and they often rely on images or slides that have to display without lag.
+- **The goal isn't to eliminate WhatsApp, but to set limits on it.** Patients prefer it because it's easy. What's missing is structure, not another channel.
+- **Messaging works when it has a frame.** In a randomized trial of 850 adults (JAMA Network Open, October 2025), message-based therapy showed no differences from video therapy in depression or social functioning at 12 weeks, as long as frequency, response times and goals were defined.
+- **Rapport can be built online.** In a Colombian university clinic, 85.7% of patients said a trusting relationship was possible "always" or "almost always", though it takes more effort from the therapist.
+- **Demand arrives after hours.** 43% of online bookings happen outside working hours (Doctoralia, vendor data).
 
-## Priority features
+## Design principles
 
-**First, what hurts most:**
+- **Mobile first, low bandwidth.** Everything must work on low-end Android, with no installs or accounts for participants.
+- **Simple for participants.** Large buttons, clear icons and a less serious look than the practitioner's side, so they lose their fear of using it and you can guide them with simple instructions.
+- **The practitioner defines the frame.** The platform upholds your rules; it doesn't impose them.
+- **Sensitive data from day one.** Mental-health information is protected as such. Nothing that ends up in unencrypted spreadsheets today is repeated here.
 
-1. **Frame-bound channel.** Writing is as easy as on WhatsApp, but with visible office hours, an agreed response time, an auto-reply written by the therapist and a clear emergency path. The practitioner can bring a message into the next session's agenda.
-2. **Shared space per session.** Before: reminder, one-tap join and a short "how are you arriving today?". During: shared notes, whiteboard and worksheets. After: summary, homework for the week and next appointment.
-3. **Human psychometric follow-up.** Public-domain questionnaires (PHQ-9, GAD-7, DASS-21) sent before chosen sessions, scored automatically, with a trend chart to discuss with the patient. If a risk item is endorsed, the practitioner is notified, with no automated actions.
-4. **A connection that just works.** No installs or accounts, works on low-end Android, with audio-only fallback, automatic reconnection and "call me by phone" if the video drops.
-5. **Privacy at home.** A reminder to find a private space, a headphone suggestion and a discreet "I'm not alone" signal the patient can send without speaking.
+## What the pilot includes: online workshops
 
-**Next, what sets us apart:** session-rhythm aids for the therapist (time remaining, hiding self-view), crisis-ready sessions, couples, family and group modes, a room for working with children, and a patient document inbox.
+1. **Workshop and participants.** Each workshop, of one or several sessions, has its own participant list. Each participant has a profile with their usual location, emergency contact and invoicing details, and joins without installing anything or creating an account.
+2. **Sessions.** Video or audio only, one fixed link for the whole workshop and a waiting room tied to the session.
+3. **Group view.** All participants visible, a speaking-turn view and a private space to talk with a single participant without interrupting the group. It works the same when several participants join from one device.
+4. **Material library.** A folder where you upload images, videos and PDFs before the session, to share them in one click without searching your computer.
+5. **Lag-free presentation.** Material is shown from the platform, without relying on screen sharing, and adapts to each participant's connection.
+6. **Shared workshop space.** Before: reminder, one-tap join and pre-session material. During: material, whiteboard and worksheets. After: summary, homework and the date of the next session, available to the whole group.
+7. **Group privacy.** A prompt to use headphones and find a private space, a discreet "I'm not alone" signal and a switch to chat if someone walks into the room.
+8. **Resilient connection.** Audio-only fallback and automatic reconnection to the same session.
+9. **Reminders and messages.** Reminders over WhatsApp (templates, no conversations) and email. Participants' questions arrive in a channel with your office hours visible, your response time and your auto-reply, not in your personal WhatsApp.
+10. **Payments.** Each participant uploads their payment proof and CFDI details once; you export them to your invoicing tool.
 
-## Integrations
+## In the consulting room
 
-- **WhatsApp:** reminders, rescheduling links and document delivery. Conversations stay within the platform's frame.
-- **Email:** reminders, summaries and documents where it's the norm.
+Practice is often hybrid, so several parts of Sinapsis also serve in-person sessions:
+
+- **One calendar.** In-person and online appointments live in the same calendar, with reminders over WhatsApp and email.
+- **Frame-bound channel.** Messages between sessions follow the same rules wherever the appointment takes place. You can flag a message to address in the next session.
+- **Pre-session questionnaires.** The patient fills in the PHQ-9, GAD-7 or DASS-21 on their phone before arriving, and you review the trend chart together in session.
+- **Shared space per session.** The summary, homework and next appointment are available after an in-person session, just as online.
+- **Material library.** The same material from your workshops can be shown on a screen in the office or sent to the patient afterwards.
+- **Documents and payments.** Lab results, reports, worksheets, payment proofs and CFDI details are organized per patient instead of in the chat.
+
+## What we will measure
+
+We'll compare your workshops before and during the pilot on:
+
+- Attendance and no-shows per session.
+- Participants who lost their connection and how many were recovered by audio or reconnection.
+- Failures when presenting material.
+- Administrative time per workshop (reminders, changes, payments, sending material).
+- Messages received outside office hours.
+
+We also want your and the participants' feedback on what's missing, what gets in the way and what isn't clear.
+
+## Next stage: one-on-one sessions
+
+- **Full frame-bound channel**, with a clear emergency path.
+- **Shared space per one-on-one session:** "how are you arriving today?", shared notes, summary and homework.
+- **Psychometric follow-up:** PHQ-9, GAD-7 and DASS-21 in their validated Spanish versions, automatic scoring, trend chart and a notification to the practitioner when a risk item is endorsed, with no automated actions.
+- **"Call me by phone"** if the session drops.
+
+## Later phases
+
+- **Clinical differentiators:** time remaining visible only to the therapist, wrap-up cue, hiding self-view and a private notepad; crisis-ready sessions (local crisis lines per patient and a follow-up template); couples and family modes; a room for working with children; a patient document inbox.
+- **Administrative workflow:** sync with Google, Outlook and iCal, patient self-rescheduling within your rules, and invitations for supervisors or interpreters, always visible to the patient.
+- **Expansion:** other health professions and the United States.
+
+## Planned integrations
+
+- **WhatsApp:** reminders, rescheduling links and document delivery, without you managing it by hand. Conversations stay within the frame.
+- **Email:** reminders, summaries and documents.
 - **Calendars:** two-way sync with Google, Outlook and iCal.
 - **Phone:** one-tap "call me" when the session drops.
-- **Invoicing tools:** export invoicing details (CFDI) and payment proofs to the tool the practitioner already uses.
-- **Practitioners' systems (health records, e-prescription):** import the documents they produce there to share them with the patient.
+- **Invoicing tools:** export invoicing details (CFDI) and payment proofs to the tool you already use.
+- **Practitioners' systems (health records, e-prescription):** import the documents you produce there to share them with the patient.
 - **Psychometric publishers:** licensed instruments (such as BDI-II) only through their official channels.
 
 ## What we won't do
@@ -61,4 +107,7 @@ To stay out of regulated territory and focus on the relationship:
 - We don't diagnose or run risk assessments that trigger automated actions.
 - We don't issue tax invoices; we collect and export the data.
 
-*A note on the data: some figures come from vendors (for example, the 70% of doctors who attend patients via WhatsApp, cited by Leona) and should be taken as directional. The most robust is FUNSALUD's 79%.*
+## Open questions
+
+- **Business model:** pricing hasn't been defined yet.
+- **Data quality:** some figures come from vendors (the 30 to 60 messages a week, the Doctoralia statistics) and should be taken as directional; the most robust is FUNSALUD's 79%. Evidence on psychologists and workshops is mostly qualitative, and the pilot is meant to confirm or rule it out.
