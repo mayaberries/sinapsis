@@ -1,87 +1,78 @@
-# Sinapsis: roadmap
+# 🗺️ Sinapsis: roadmap
 
-Borrador basado en `assets/es/PITCH.md` y `assets/es/RESEARCH.md`. Las fases siguen el orden de prioridad de la investigación: primero validar, luego resolver lo que más duele a psicólogos y terapeutas en México y Latinoamérica, y al final expandir a Estados Unidos. No tiene fechas todavía; cada fase avanza cuando cumple sus criterios de salida.
+> Sinapsis se construye en ocho etapas, en este orden. Las tres primeras se centran en talleres en línea, porque así trabaja la primera profesional del piloto. No hay fechas todavía; cada etapa avanza cuando cumple sus criterios de salida.
 
-## Principios que aplican a todas las fases
+Borrador basado en `assets/es/PITCH.md` y `assets/es/RESEARCH.md`. Los [principios](PRINCIPLES.md) aplican a todas las etapas, y el [flujo de trabajo](WORKFLOW.md) explica cómo cada etapa se vuelve milestones, issues y pruebas. El detalle de cada etapa (qué demuestra, criterios de salida, áreas y decisiones abiertas) está en su propio archivo.
 
-- **Psicología primero.** Diseñamos para psicólogos y terapeutas; médicos, nutriólogos y otros profesionales vienen después, reutilizando lo que sirva.
-- **Celular primero y con poca señal.** Cada funcionalidad debe funcionar en Android de gama baja, sin instalaciones ni cuentas para el paciente.
-- **El encuadre lo define el profesional.** La plataforma sostiene sus reglas; no las impone.
-- **Fuera de territorio regulado.** No generamos recetas, no somos el expediente clínico legal, no diagnosticamos ni disparamos acciones por riesgo, no emitimos facturas fiscales.
-- **Datos sensibles desde el día uno.** La información de salud mental se protege como tal; nada de lo que hoy termina en hojas de cálculo sin cifrar debe repetirse aquí.
+```mermaid
+timeline
+    section Talleres en línea
+        POC : Un taller funciona de principio a fin
+        Validación : El problema se confirma con profesionales reales
+        Primera versión : Un taller real completo sin WhatsApp, Zoom ni Drive
+    section México
+        Piloto : Sinapsis reduce la carga del profesional
+    section Práctica completa
+        Consulta individual : Sesiones uno a uno en línea y presenciales
+        Diferenciadores clínicos : Lo que las herramientas genéricas no resuelven
+        Flujo administrativo : Ciclo administrativo cerrado sin ser producto fiscal
+    section Crecimiento
+        Expansión : Otras profesiones y Estados Unidos
+```
 
-## Fase 0: Validación
+## 1. 🧪 [POC](stages/01-poc.md)
 
-**Objetivo:** confirmar con profesionales reales lo que la investigación solo muestra de forma cualitativa o con datos de proveedores.
+- Los participantes entran desde el celular o navegador sin cuenta ni instalación.
+- El grupo se ve y se escucha, con respaldo de solo audio.
+- El material se presenta sin compartir pantalla.
+- La interfaz del participante es simple y no repite opciones.
 
-- Entrevistas directas con psicólogos y terapeutas en México y Argentina, incluyendo clínicas universitarias.
-- Revisar grupos de Facebook y foros (incluido Reddit) de psicólogos mexicanos y argentinos, que la investigación no pudo consultar.
-- Preguntas a responder:
-  - ¿Cuánto tiempo y desgaste les cuesta realmente WhatsApp? (Los datos duros en México son de médicos, no de psicólogos.)
-  - ¿Estarían dispuestos a mover a sus pacientes a otro canal, y qué tendría que tener para que el paciente acepte?
-  - ¿Qué cuestionarios usan y cómo los aplican hoy?
-  - ¿Qué tan común es el paciente que solo tiene celular o mala conexión?
-  - ¿Cómo manejan hoy cobros, comprobantes y datos para CFDI?
+## 2. 🔍 [Validación](stages/02-validation.md)
 
-**Criterio de salida:** un problema principal confirmado por los entrevistados y un grupo de terapeutas dispuestos a participar en el piloto.
+- Los profesionales prueban el POC en entrevistas y talleres de prueba.
+- Se confirma un problema principal.
+- Se forma el grupo del piloto y se ajusta el alcance de la primera versión.
 
-## Fase 1: Núcleo (MVP)
+## 3. 🚀 [Primera versión](stages/03-v1.md)
 
-**Objetivo:** reemplazar WhatsApp + Zoom/Meet + Google Forms para una práctica individual de psicología.
+- Una profesional conduce un taller real completo en Sinapsis.
+- Avisos, espacio compartido, privacidad, canal de dudas y cobros sin herramientas externas.
+- Funciona en Android de gama baja con conexión limitada.
 
-- **Perfiles:** profesional con su encuadre (horario de atención, tiempo de respuesta, respuesta automática, ruta para emergencias) y paciente con ubicación habitual, contacto de emergencia y datos de facturación.
-- **Citas:** agenda propia, video y solo audio, sala de espera ligada a la cita y liga fija.
-- **Canal con encuadre:** mensajes por paciente dentro de las reglas del profesional, con la opción de llevar un mensaje a la agenda de la próxima sesión.
-- **Espacio compartido por sesión:** antes (recordatorio, acceso en un toque, "¿cómo llegas hoy?", cuestionario), durante (notas y hojas de trabajo) y después (resumen, tarea, próxima cita).
-- **Seguimiento psicométrico:** PHQ-9, GAD-7 y DASS-21 en sus versiones validadas en español, calificación automática, gráfica de evolución y aviso al profesional ante reactivos de riesgo.
-- **Conexión resistente:** respaldo de solo audio y reconexión automática.
-- **Integraciones:** WhatsApp (solo plantillas de recordatorio y ligas) y correo electrónico.
+## 4. 🇲🇽 [Piloto en México](stages/04-pilot.md)
 
-**Criterio de salida:** un terapeuta puede llevar a todos sus pacientes de principio a fin sin salir de Sinapsis.
+- Se mide asistencia, conexión, fallas y tiempo administrativo antes y durante el piloto.
+- Las métricas mejoran y los terapeutas quieren seguir usándolo.
 
-## Fase 2: Piloto en México
+## 5. 🗣️ [Consulta individual](stages/05-individual.md)
 
-**Objetivo:** demostrar con datos que Sinapsis reduce la carga invisible.
+- Una agenda única con citas en video, audio y presenciales.
+- Canal con encuadre y espacio compartido por paciente.
+- Seguimiento psicométrico con cuestionarios de dominio público.
 
-- Un grupo pequeño de terapeutas en México usando Sinapsis con sus pacientes reales.
-- Agregar las **ayudas de privacidad en casa**: recordatorio para buscar un espacio, sugerencia de audífonos, señal discreta de "no estoy solo" y cambio a chat dentro de la sesión.
-- Agregar el **"llámame por teléfono"** cuando la sesión se corta.
-- Medir antes y después:
-  - Mensajes recibidos fuera de horario.
-  - Inasistencias y cancelaciones tardías.
-  - Tiempo administrativo por semana (reagendas, cuestionarios, cobros).
-  - Cuestionarios completados antes de la sesión.
-  - Sesiones que se cortaron y cuántas se recuperaron con audio o teléfono.
+## 6. 🩺 [Diferenciadores clínicos](stages/06-clinical.md)
 
-**Criterio de salida:** mejora visible en esas métricas y terapeutas que quieran seguir usándolo.
+- Herramientas para el ritmo de sesión y para sesiones preparadas para crisis.
+- Modos para parejas, familias y niños.
+- Bandeja de documentos del paciente.
 
-## Fase 3: Diferenciadores clínicos
+## 7. 🧾 [Flujo administrativo](stages/07-admin.md)
 
-**Objetivo:** cubrir lo que las herramientas genéricas y las de telesalud no resuelven.
+- Cobros y datos para CFDI de pacientes individuales, con exportación.
+- Sincronización de calendarios y reagenda.
+- Supervisores e intérpretes en sesión.
 
-- **Ritmo de sesión:** tiempo restante visible solo para el terapeuta, aviso de cierre, ocultar la autovista y libreta privada.
-- **Sesiones preparadas para crisis:** contacto de emergencia y líneas de crisis locales por paciente, reconexión en un toque y plantilla de mensaje de seguimiento. Apoya el criterio del terapeuta; no es un protocolo automático.
-- **Parejas, familias y grupos:** entrar desde uno o varios dispositivos, vista con todos los integrantes, turno de palabra, espacio privado para hablar con uno solo y aviso de audífonos en grupos.
-- **Sala para niños:** pizarrón para dibujar, objetos de juego sencillos y vista para el cuidador.
-- **Bandeja de documentos del paciente:** estudios, reportes y cartas subidos por el paciente, y documentos compartidos por el profesional, etiquetados y fechados.
-- **Integración:** importar documentos de los sistemas del profesional (expediente, receta electrónica) para compartirlos.
+## 8. 🌎 [Expansión](stages/08-expansion.md)
 
-## Fase 4: Flujo administrativo
+- Otras profesiones de la salud usan el núcleo.
+- Interfaz en inglés para Estados Unidos.
+- Instrumentos con licencia solo vía sus editoriales.
 
-**Objetivo:** cerrar el ciclo administrativo sin convertirnos en producto fiscal.
+## ❓ Decisiones abiertas para todas las etapas
 
-- **Cierre administrativo:** pedir una sola vez los datos para CFDI y guardar comprobantes de pago por paciente, con exportación a la herramienta de facturación del profesional.
-- **Calendarios:** sincronización en ambos sentidos con Google, Outlook e iCal, y reagenda por el paciente dentro de las reglas del profesional.
-- **Supervisión e intérpretes:** invitar a un supervisor (observador, sin audio) o a un intérprete, siempre visible para el paciente. Útil para clínicas universitarias, comunes en Latinoamérica.
+Las decisiones de una sola etapa están en el archivo de esa etapa.
 
-## Fase 5: Expansión
-
-- **Otras profesiones de la salud:** médicos, nutriólogos, terapeutas físicos y consejeros deportivos, con lo que necesiten cambiar del núcleo.
-- **Estados Unidos:** interfaz en inglés y soporte fuerte para práctica híbrida. Ahí el estándar mínimo (sala de espera, liga fija, sin descargas) ya existe, así que la propuesta se apoya en el canal con encuadre, el espacio compartido y los modos para parejas, familias y niños.
-- **Instrumentos con licencia** (como el BDI-II) solo a través de los canales de sus editoriales.
-
-## Preguntas abiertas
-
-- **Calidad de los datos:** varias cifras vienen de proveedores (70% de médicos en WhatsApp, 30–60 mensajes por semana, estadísticas de Doctoralia) y algunas encuestas son de la pandemia. La Fase 0 debe confirmarlas o descartarlas.
-- **Cobro de honorarios en EE. UU.:** allá el flujo administrativo gira alrededor de aseguradoras y portales. Falta decidir si entra en el alcance y cómo, sin cruzar los límites regulatorios.
-- **Modelo de negocio:** la investigación no cubre precios; queda por definir.
+| Decisión                                                                                                                                                                                                                             | Issue |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----- |
+| Modelo de negocio y precios                                                                                                                                                                                                          |       |
+| Calidad de los datos: varias cifras vienen de proveedores (70% de médicos en WhatsApp, 30–60 mensajes por semana, estadísticas de Doctoralia) y algunas encuestas son de la pandemia; la validación debe confirmarlas o descartarlas |       |
