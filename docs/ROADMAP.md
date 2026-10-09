@@ -5,6 +5,9 @@
 Borrador basado en `assets/es/PITCH.md` y `assets/es/RESEARCH.md`. Los [principios](PRINCIPLES.md) aplican a todas las etapas, y el [flujo de trabajo](WORKFLOW.md) explica cómo cada etapa se vuelve milestones, issues y pruebas. El detalle de cada etapa (qué demuestra, criterios de salida, áreas y decisiones abiertas) está en su propio archivo.
 
 ```mermaid
+---
+title: Timeline
+---
 timeline
     section Talleres en línea
         POC : Un taller funciona de principio a fin
