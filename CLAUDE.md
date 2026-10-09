@@ -11,7 +11,7 @@ Sinapsis ("synapse" in Spanish) is at the pre-code stage. The repo contains only
 - `assets/{en,es}/PITCH.md`: product pitch.
 - `docs/ROADMAP.md` (English) and `docs/ROADMAP_es.md` (Spanish): roadmap timeline: the eight stages in order, a few points per stage, and cross-stage open decisions. Keep both in sync.
 - `docs/stages/NN-*.md`: one file per stage (English only, internal): what it demonstrates, exit criteria, areas and that stage's open decisions.
-- `docs/PRINCIPLES.md`: principles that apply to every stage (Spanish).
+- `docs/DECISIONS.md`: where to look up why things are built the way they are (English, internal): the principles every stage follows and the technical decisions made (frontend: Astro + Vue, TypeScript PWA; backend: Python/FastAPI with Kalens and Xolo). When an open decision in a stage file is made, record it here and in that stage's "Decisions made".
 - `docs/WORKFLOW.md`: workflow spec (Spanish): the milestone (stage) → story (area) → task hierarchy on GitHub, and the test-driven cycle each story follows. Only the POC's stories are ordered; later stages get ordered when they start.
 
 The POC depends on two of the user's own libraries: [Kalens](https://github.com/mayaberries/kalens) (scheduling engine, Python/FastAPI/PostgreSQL/Redis; it sets the backend stack and expects the host to provide users and auth) and Xolo (authentication, not created yet; to be extracted from another project). See `docs/stages/01-poc.md`.
