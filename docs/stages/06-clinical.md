@@ -1,37 +1,37 @@
-# 🩺 Diferenciadores clínicos: lo que las herramientas genéricas no resuelven
+# 🩺 Clinical differentiators: what generic tools don't solve
 
-← [Roadmap](../ROADMAP.md) · Anterior: [Consulta individual](05-individual.md) · Siguiente: [Flujo administrativo](07-admin.md) →
+← [Roadmap](../ROADMAP.md) · Previous: [Individual sessions](05-individual.md) · Next: [Administrative flow](07-admin.md) →
 
-Cubrir lo que las herramientas genéricas y las de telesalud no resuelven.
+Cover what generic tools and telehealth tools don't solve.
 
-📍 Milestone: por crear. 🏔️ Issue padre: por crear.
+📍 Milestone: to be created. 🏔️ Parent issue: to be created.
 
-## 🎬 Qué demuestra la etapa
+## 🎬 What the stage demonstrates
 
-- Tiempo restante visible solo para el terapeuta, aviso de cierre, ocultar la autovista y libreta privada.
-- Contacto de emergencia y líneas de crisis locales por paciente, reconexión en un toque y plantilla de mensaje de seguimiento. Apoya el criterio del terapeuta; no es un protocolo automático.
-- Modos para parejas y familias: entrar desde uno o varios dispositivos, vista con todos los integrantes y espacio privado para hablar con uno solo.
-- Sala para niños: pizarrón para dibujar, objetos de juego sencillos y vista para el cuidador.
-- Bandeja de documentos del paciente: estudios, reportes y cartas subidos por el paciente, y documentos compartidos por el profesional, etiquetados y fechados.
-- Importación de documentos de los sistemas del profesional (expediente, receta electrónica) para compartirlos.
+- Remaining time visible only to the therapist, a wrap-up alert, hide self-view and a private notepad.
+- Emergency contact and local crisis lines per patient, one-tap reconnection and a follow-up message template. It supports the therapist's judgment; it isn't an automated protocol.
+- Modes for couples and families: joining from one or several devices, a view with every member and a private space to talk with just one.
+- A children's room: a drawing whiteboard, simple play objects and a view for the caregiver.
+- A patient document tray: tests, reports and letters uploaded by the patient, and documents shared by the practitioner, tagged and dated.
+- Importing documents from the practitioner's systems (clinical record, e-prescription) to share them.
 
-## ✅ Criterios de salida
+## ✅ Exit criteria
 
-- Todos los IDs de prueba asignados a esta etapa están en verde
+- All test IDs assigned to this stage are green
 
-## 🧩 Áreas
+## 🧩 Areas
 
-| Área                                             | Issue de desarrollo | IDs de prueba | Issue de pruebas |
-| ------------------------------------------------ | ------------------- | ------------- | ---------------- |
-| Ritmo de sesión (RIT)                            |                     |               |                  |
-| Sesiones preparadas para crisis (CRI)            |                     |               |                  |
-| Modos para parejas y familias (PAR)              |                     |               |                  |
-| Sala para niños (NIN)                            |                     |               |                  |
-| Bandeja de documentos del paciente (DOC)         |                     |               |                  |
-| Importación desde sistemas del profesional (IMP) |                     |               |                  |
+|Area|Development issue|Test IDs|Test issue|
+|---|---|---|---|
+|Session pacing (RIT)||||
+|Crisis-ready sessions (CRI)||||
+|Modes for couples and families (PAR)||||
+|Children's room (NIN)||||
+|Patient document tray (DOC)||||
+|Import from the practitioner's systems (IMP)||||
 
-## ❓ Decisiones abiertas
+## ❓ Open decisions
 
-Cada una bloquea las pruebas que dependen de ella.
+Each one blocks the tests that depend on it.
 
-Ninguna por ahora.
+None for now.

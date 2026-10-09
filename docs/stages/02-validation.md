@@ -1,42 +1,42 @@
-# 🔍 Validación: confirmar el problema con profesionales reales
+# 🔍 Validation: confirm the problem with real practitioners
 
-← [Roadmap](../ROADMAP.md) · Anterior: [POC](01-poc.md) · Siguiente: [Primera versión](03-v1.md) →
+← [Roadmap](../ROADMAP.md) · Previous: [POC](01-poc.md) · Next: [First version](03-v1.md) →
 
-Confirmar con profesionales reales lo que la investigación solo muestra de forma cualitativa o con datos de proveedores, usando el POC como material: los profesionales lo prueban en lugar de imaginarlo.
+Confirm with real practitioners what the research only shows qualitatively or with vendor data, using the POC as material: practitioners try it instead of imagining it.
 
-📍 Milestone: por crear. 🏔️ Issue padre: por crear.
+📍 Milestone: to be created. 🏔️ Parent issue: to be created.
 
-## 🎬 Qué demuestra la etapa
+## 🎬 What the stage demonstrates
 
-- Entrevistas directas con psicólogos y terapeutas en México y Argentina, incluyendo clínicas universitarias, con una demostración del POC.
-- Talleres de prueba con el POC, con profesionales y participantes reales.
-- Revisión de grupos de Facebook y foros (incluido Reddit) de psicólogos mexicanos y argentinos, que la investigación no pudo consultar.
-- Respuestas a estas preguntas:
-  - ¿Cuánto tiempo y desgaste les cuesta realmente WhatsApp? (Los datos duros en México son de médicos, no de psicólogos.)
-  - ¿Estarían dispuestos a mover a sus pacientes a otro canal, y qué tendría que tener para que el paciente acepte?
-  - ¿Qué tan común es el formato de taller y cómo lo conducen hoy?
-  - ¿Qué cuestionarios usan y cómo los aplican hoy?
-  - ¿Qué tan común es el paciente que solo tiene celular o mala conexión?
-  - ¿Cómo manejan hoy cobros, comprobantes y datos para CFDI?
-  - ¿Qué falta, qué estorba y qué no se entiende del POC?
+- Direct interviews with psychologists and therapists in Mexico and Argentina, including university clinics, with a POC demo.
+- Test workshops with the POC, with real practitioners and participants.
+- A review of Facebook groups and forums (including Reddit) of Mexican and Argentine psychologists, which the research couldn't access.
+- Answers to these questions:
+  - How much time and strain does WhatsApp really cost them? (The hard data in Mexico is about doctors, not psychologists.)
+  - Would they be willing to move their patients to another channel, and what would it need for patients to accept?
+  - How common is the workshop format, and how do they run it today?
+  - Which questionnaires do they use, and how do they administer them today?
+  - How common is the patient who only has a phone or a poor connection?
+  - How do they handle payments, receipts and CFDI data today?
+  - What's missing, what gets in the way and what's unclear in the POC?
 
-## ✅ Criterios de salida
+## ✅ Exit criteria
 
-- Un problema principal confirmado por los entrevistados
-- Un grupo de terapeutas dispuestos a participar en el piloto
-- Cambios al alcance de la primera versión a partir de lo que mostró el POC
+- One main problem confirmed by the interviewees
+- A group of therapists willing to join the pilot
+- Changes to the first version's scope based on what the POC showed
 
-## 🧩 Áreas
+## 🧩 Areas
 
-| Área                                                         | Issue |
-| ------------------------------------------------------------ | ----- |
-| Entrevistas con profesionales                                |       |
-| Revisión de grupos y foros                                   |       |
-| Entrevista de talleres con la primera profesional del piloto |       |
-| Talleres de prueba con el POC                                |       |
+|Area|Issue|
+|---|---|
+|Interviews with practitioners||
+|Review of groups and forums||
+|Workshop interview with the pilot's first practitioner||
+|Test workshops with the POC||
 
-## ❓ Decisiones abiertas
+## ❓ Open decisions
 
-Cada una bloquea las pruebas que dependen de ella.
+Each one blocks the tests that depend on it.
 
-Ninguna por ahora.
+None for now.

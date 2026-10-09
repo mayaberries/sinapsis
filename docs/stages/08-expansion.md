@@ -1,31 +1,31 @@
-# 🌎 Expansión: otras profesiones y Estados Unidos
+# 🌎 Expansion: other professions and the United States
 
-← [Roadmap](../ROADMAP.md) · Anterior: [Flujo administrativo](07-admin.md)
+← [Roadmap](../ROADMAP.md) · Previous: [Administrative flow](07-admin.md)
 
-Llevar Sinapsis a otras profesiones de la salud y a Estados Unidos.
+Bring Sinapsis to other health professions and to the United States.
 
-📍 Milestone: por crear. 🏔️ Issue padre: por crear.
+📍 Milestone: to be created. 🏔️ Parent issue: to be created.
 
-## 🎬 Qué demuestra la etapa
+## 🎬 What the stage demonstrates
 
-- Médicos, nutriólogos, terapeutas físicos y consejeros deportivos usan el núcleo con lo que necesiten cambiar.
-- Interfaz en inglés y soporte fuerte para práctica híbrida en Estados Unidos. Ahí el estándar mínimo (sala de espera, liga fija, sin descargas) ya existe, así que la propuesta se apoya en el canal con encuadre, el espacio compartido y los modos para talleres, parejas, familias y niños.
-- Instrumentos con licencia (como el BDI-II) solo a través de los canales de sus editoriales.
+- Doctors, nutritionists, physical therapists and sports counselors use the core, with whatever changes they need.
+- An English interface and strong support for hybrid practice in the United States. There, the baseline (waiting room, fixed link, no downloads) already exists, so the pitch rests on the boundaried channel, the shared space and the modes for workshops, couples, families and children.
+- Licensed instruments (such as the BDI-II) only through their publishers' channels.
 
-## ✅ Criterios de salida
+## ✅ Exit criteria
 
-- Todos los IDs de prueba asignados a esta etapa están en verde
+- All test IDs assigned to this stage are green
 
-## 🧩 Áreas
+## 🧩 Areas
 
-|Área|Issue de desarrollo|IDs de prueba|Issue de pruebas|
+|Area|Development issue|Test IDs|Test issue|
 |---|---|---|---|
-|Otras profesiones de la salud||||
-|Interfaz en inglés y práctica híbrida en EE. UU. (I18N)||||
-|Instrumentos con licencia vía editoriales (LIC)||||
+|Other health professions||||
+|English interface and hybrid practice in the US (I18N)||||
+|Licensed instruments through publishers (LIC)||||
 
-## ❓ Decisiones abiertas
+## ❓ Open decisions
 
-Cada una bloquea las pruebas que dependen de ella.
+Each one blocks the tests that depend on it.
 
-Ninguna por ahora.
+None for now.

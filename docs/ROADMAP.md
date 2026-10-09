@@ -1,81 +1,83 @@
 # 🗺️ Sinapsis: roadmap
 
-> Sinapsis se construye en ocho etapas, en este orden. Las tres primeras se centran en talleres en línea, porque así trabaja la primera profesional del piloto. No hay fechas todavía; cada etapa avanza cuando cumple sus criterios de salida.
+🌐 [Español](ROADMAP_es.md)
 
-Borrador basado en `assets/es/PITCH.md` y `assets/es/RESEARCH.md`. Los [principios](PRINCIPLES.md) aplican a todas las etapas, y el [flujo de trabajo](WORKFLOW.md) explica cómo cada etapa se vuelve milestones, issues y pruebas. El detalle de cada etapa (qué demuestra, criterios de salida, áreas y decisiones abiertas) está en su propio archivo.
+> Sinapsis is built in eight stages, in this order. The first three focus on online workshops, because that's how the pilot's first practitioner works. There are no dates yet; each stage moves forward when it meets its exit criteria.
+
+Draft based on `assets/en/PITCH.md` and `assets/en/RESEARCH.md`. The [principles](PRINCIPLES.md) apply to every stage, and the [workflow](WORKFLOW.md) explains how each stage becomes milestones, issues and tests. Each stage's details (what it demonstrates, exit criteria, areas and open decisions) live in their own file.
 
 ```mermaid
 ---
 title: Timeline
 ---
 timeline
-    section Talleres en línea
-        POC : Un taller funciona de principio a fin
-        Validación : El problema se confirma con profesionales reales
-        Primera versión : Un taller real completo sin WhatsApp, Zoom ni Drive
-    section México
-        Piloto : Sinapsis reduce la carga del profesional
-    section Práctica completa
-        Consulta individual : Sesiones uno a uno en línea y presenciales
-        Diferenciadores clínicos : Lo que las herramientas genéricas no resuelven
-        Flujo administrativo : Ciclo administrativo cerrado sin ser producto fiscal
-    section Crecimiento
-        Expansión : Otras profesiones y Estados Unidos
+    section Online workshops
+        POC : A workshop works end to end
+        Validation : The problem is confirmed with real practitioners
+        First version : A full real workshop without WhatsApp, Zoom or Drive
+    section Mexico
+        Pilot : Sinapsis reduces the practitioner's workload
+    section Full practice
+        Individual sessions : One-on-one sessions, online and in person
+        Clinical differentiators : What generic tools don't solve
+        Administrative flow : A closed administrative cycle without being a tax product
+    section Growth
+        Expansion : Other professions and the United States
 ```
 
 ## 1. 🧪 [POC](stages/01-poc.md)
 
-- Los participantes entran desde el celular o navegador sin cuenta ni instalación.
-- El grupo se ve y se escucha, con respaldo de solo audio.
-- El material se presenta sin compartir pantalla.
-- La interfaz del participante es simple y no repite opciones.
+- Participants join from their phone or browser with no account or install.
+- The group can see and hear each other, with an audio-only fallback.
+- Material is presented without screen sharing.
+- The participant interface is simple and doesn't repeat options.
 
-## 2. 🔍 [Validación](stages/02-validation.md)
+## 2. 🔍 [Validation](stages/02-validation.md)
 
-- Los profesionales prueban el POC en entrevistas y talleres de prueba.
-- Se confirma un problema principal.
-- Se forma el grupo del piloto y se ajusta el alcance de la primera versión.
+- Practitioners try the POC in interviews and test workshops.
+- One main problem is confirmed.
+- The pilot group is formed and the first version's scope is adjusted.
 
-## 3. 🚀 [Primera versión](stages/03-v1.md)
+## 3. 🚀 [First version](stages/03-v1.md)
 
-- Una profesional conduce un taller real completo en Sinapsis.
-- Avisos, espacio compartido, privacidad, canal de dudas y cobros sin herramientas externas.
-- Funciona en Android de gama baja con conexión limitada.
+- A practitioner runs a full real workshop in Sinapsis.
+- Reminders, shared space, privacy, a questions channel and payments without outside tools.
+- It works on low-end Android with a limited connection.
 
-## 4. 🇲🇽 [Piloto en México](stages/04-pilot.md)
+## 4. 🇲🇽 [Pilot in Mexico](stages/04-pilot.md)
 
-- Se mide asistencia, conexión, fallas y tiempo administrativo antes y durante el piloto.
-- Las métricas mejoran y los terapeutas quieren seguir usándolo.
+- Attendance, connection, failures and administrative time are measured before and during the pilot.
+- The metrics improve and therapists want to keep using it.
 
-## 5. 🗣️ [Consulta individual](stages/05-individual.md)
+## 5. 🗣️ [Individual sessions](stages/05-individual.md)
 
-- Una agenda única con citas en video, audio y presenciales.
-- Canal con encuadre y espacio compartido por paciente.
-- Seguimiento psicométrico con cuestionarios de dominio público.
+- A single calendar with video, audio and in-person appointments.
+- A boundaried channel and a shared space per patient.
+- Psychometric follow-up with public-domain questionnaires.
 
-## 6. 🩺 [Diferenciadores clínicos](stages/06-clinical.md)
+## 6. 🩺 [Clinical differentiators](stages/06-clinical.md)
 
-- Herramientas para el ritmo de sesión y para sesiones preparadas para crisis.
-- Modos para parejas, familias y niños.
-- Bandeja de documentos del paciente.
+- Tools for session pacing and for crisis-ready sessions.
+- Modes for couples, families and children.
+- A patient document tray.
 
-## 7. 🧾 [Flujo administrativo](stages/07-admin.md)
+## 7. 🧾 [Administrative flow](stages/07-admin.md)
 
-- Cobros y datos para CFDI de pacientes individuales, con exportación.
-- Sincronización de calendarios y reagenda.
-- Supervisores e intérpretes en sesión.
+- Payments and CFDI data for individual patients, with export.
+- Calendar sync and rescheduling.
+- Supervisors and interpreters in session.
 
-## 8. 🌎 [Expansión](stages/08-expansion.md)
+## 8. 🌎 [Expansion](stages/08-expansion.md)
 
-- Otras profesiones de la salud usan el núcleo.
-- Interfaz en inglés para Estados Unidos.
-- Instrumentos con licencia solo vía sus editoriales.
+- Other health professions use the core.
+- An English interface for the United States.
+- Licensed instruments only through their publishers.
 
-## ❓ Decisiones abiertas para todas las etapas
+## ❓ Open decisions for every stage
 
-Las decisiones de una sola etapa están en el archivo de esa etapa.
+Decisions that belong to a single stage are in that stage's file.
 
-| Decisión                                                                                                                                                                                                                             | Issue |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----- |
-| Modelo de negocio y precios                                                                                                                                                                                                          |       |
-| Calidad de los datos: varias cifras vienen de proveedores (70% de médicos en WhatsApp, 30–60 mensajes por semana, estadísticas de Doctoralia) y algunas encuestas son de la pandemia; la validación debe confirmarlas o descartarlas |       |
+|Decision|Issue|
+|---|---|
+|Business model and pricing||
+|Data quality: several figures come from vendors (70% of doctors on WhatsApp, 30–60 messages per week, Doctoralia statistics) and some surveys date from the pandemic; validation must confirm or discard them||

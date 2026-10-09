@@ -1,42 +1,42 @@
-# 🧪 POC: probar que un taller funciona de principio a fin
+# 🧪 POC: prove that a workshop works end to end
 
-← [Roadmap](../ROADMAP.md) · Siguiente: [Validación](02-validation.md) →
+← [Roadmap](../ROADMAP.md) · Next: [Validation](02-validation.md) →
 
-Construir lo mínimo para tener material con el cual trabajar con los profesionales en la validación. Probar con un taller de prueba lo que más falla hoy: que los participantes entren desde el celular sin instalar nada, que el grupo se vea y se escuche, y que el material se muestre sin depender de compartir pantalla.
+Build the minimum needed to have material to work with practitioners during validation. Use a test workshop to try what fails most today: participants joining from their phone without installing anything, the group seeing and hearing each other, and material being shown without relying on screen sharing.
 
-📍 Milestone: por crear. 🏔️ Issue padre: por crear.
+📍 Milestone: to be created. 🏔️ Parent issue: to be created.
 
-## 🎬 Qué demuestra la etapa
+## 🎬 What the stage demonstrates
 
-- La profesional crea un taller y obtiene una liga fija.
-- Varios participantes entran desde Android de gama baja, sin cuentas ni instalaciones, y esperan en la sala de espera.
-- Todo el grupo se ve en una sola vista, y quien pierde el video sigue en la sesión con solo audio.
-- La profesional sube imágenes, un video y un PDF antes de la sesión y los muestra en un clic, sin compartir pantalla.
-- La interfaz del participante no repite opciones: las acciones que llevan al mismo objetivo se agrupan bajo un solo punto de entrada, y las opciones secundarias aparecen solo cuando se necesitan.
+- The practitioner creates a workshop and gets a fixed link.
+- Several participants join from low-end Android, with no accounts or installs, and wait in the waiting room.
+- The whole group is visible in a single view, and anyone who loses video stays in the session with audio only.
+- The practitioner uploads images, a video and a PDF before the session and shows them in one click, without screen sharing.
+- The participant interface doesn't repeat options: actions that lead to the same goal are grouped under a single entry point, and secondary options appear only when needed.
 
-## ✅ Criterios de salida
+## ✅ Exit criteria
 
-- Todos los IDs de prueba asignados a esta etapa están en verde
-- Un taller de prueba con la primera profesional del piloto se completa sin salir de Sinapsis
-- El POC está listo para mostrarse en las entrevistas de validación
+- All test IDs assigned to this stage are green
+- A test workshop with the pilot's first practitioner is completed without leaving Sinapsis
+- The POC is ready to be shown in the validation interviews
 
-## 🧩 Áreas
+## 🧩 Areas
 
-| Área                                                                                              | Issue de desarrollo | IDs de prueba | Issue de pruebas |
-| ------------------------------------------------------------------------------------------------- | ------------------- | ------------- | ---------------- |
-| Preparar el proyecto y el flujo de integración continua                                           |                     |               |                  |
-| Crear talleres y su liga fija (TLL)                                                               |                     |               |                  |
-| Entrar sin cuenta ni instalación y sala de espera (SES)                                           |                     |               |                  |
-| Videollamada de grupo con respaldo de solo audio (GRP)                                            |                     |               |                  |
-| Subir y presentar material sin compartir pantalla (MAT)                                           |                     |               |                  |
-| Controles grandes y claros para participantes, agrupados por tarea y sin opciones repetidas (UIP) |                     |               |                  |
+|Area|Development issue|Test IDs|Test issue|
+|---|---|---|---|
+|Set up the project and the continuous integration pipeline||||
+|Create workshops and their fixed link (TLL)||||
+|Join without an account or install, and waiting room (SES)||||
+|Group video call with audio-only fallback (GRP)||||
+|Upload and present material without screen sharing (MAT)||||
+|Large, clear participant controls, grouped by task with no repeated options (UIP)||||
 
-## ❓ Decisiones abiertas
+## ❓ Open decisions
 
-Cada una bloquea las pruebas que dependen de ella.
+Each one blocks the tests that depend on it.
 
-|Decisión|Issue|
+|Decision|Issue|
 |---|---|
-|Plataforma, stack y conjunto de pruebas||
-|Proveedor de video y cómo se degrada a solo audio||
-|Formatos y tamaño máximo del material||
+|Platform, stack and test suite||
+|Video provider and how it degrades to audio only||
+|Material formats and maximum size||

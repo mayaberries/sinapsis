@@ -1,33 +1,33 @@
-# 🧾 Flujo administrativo: cerrar el ciclo sin ser producto fiscal
+# 🧾 Administrative flow: close the loop without becoming a tax product
 
-← [Roadmap](../ROADMAP.md) · Anterior: [Diferenciadores clínicos](06-clinical.md) · Siguiente: [Expansión](08-expansion.md) →
+← [Roadmap](../ROADMAP.md) · Previous: [Clinical differentiators](06-clinical.md) · Next: [Expansion](08-expansion.md) →
 
-Cerrar el ciclo administrativo sin convertirnos en producto fiscal.
+Close the administrative loop without turning into a tax product.
 
-📍 Milestone: por crear. 🏔️ Issue padre: por crear.
+📍 Milestone: to be created. 🏔️ Parent issue: to be created.
 
-## 🎬 Qué demuestra la etapa
+## 🎬 What the stage demonstrates
 
-- Los comprobantes de pago y datos para CFDI de la primera versión se extienden a los pacientes individuales.
-- Sincronización en ambos sentidos con Google, Outlook e iCal, y reagenda por el paciente dentro de las reglas del profesional.
-- Invitación a un supervisor (observador, sin audio) o a un intérprete, siempre visible para el paciente. Útil para clínicas universitarias, comunes en Latinoamérica.
+- The first version's payment receipts and CFDI data extend to individual patients.
+- Two-way sync with Google, Outlook and iCal, and patient rescheduling within the practitioner's rules.
+- Inviting a supervisor (observer, no audio) or an interpreter, always visible to the patient. Useful for university clinics, which are common in Latin America.
 
-## ✅ Criterios de salida
+## ✅ Exit criteria
 
-- Todos los IDs de prueba asignados a esta etapa están en verde
+- All test IDs assigned to this stage are green
 
-## 🧩 Áreas
+## 🧩 Areas
 
-|Área|Issue de desarrollo|IDs de prueba|Issue de pruebas|
+|Area|Development issue|Test IDs|Test issue|
 |---|---|---|---|
-|Cobros y CFDI para pacientes individuales (COB)||||
-|Sincronización de calendarios y reagenda (CAL)||||
-|Supervisores e intérpretes (SUP)||||
+|Payments and CFDI for individual patients (COB)||||
+|Calendar sync and rescheduling (CAL)||||
+|Supervisors and interpreters (SUP)||||
 
-## ❓ Decisiones abiertas
+## ❓ Open decisions
 
-Cada una bloquea las pruebas que dependen de ella.
+Each one blocks the tests that depend on it.
 
-|Decisión|Issue|
+|Decision|Issue|
 |---|---|
-|Cobro de honorarios en EE. UU. (aseguradoras y portales) y si entra en el alcance||
+|Fee collection in the US (insurers and portals), and whether it's in scope||

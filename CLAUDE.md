@@ -9,8 +9,8 @@ Sinapsis ("synapse" in Spanish) is at the pre-code stage. The repo contains only
 - `README.md`: product vision and core entities.
 - `assets/{en,es}/RESEARCH.md`: practitioner pain-point research and a prioritized feature list (Tier 1–3). Treat it as the product spec until a real one exists.
 - `assets/{en,es}/PITCH.md`: product pitch.
-- `docs/ROADMAP.md`: roadmap timeline (Spanish): the eight stages in order, a few points per stage, and cross-stage open decisions.
-- `docs/stages/NN-*.md`: one file per stage (Spanish): what it demonstrates, exit criteria, areas and that stage's open decisions.
+- `docs/ROADMAP.md` (English) and `docs/ROADMAP_es.md` (Spanish): roadmap timeline: the eight stages in order, a few points per stage, and cross-stage open decisions. Keep both in sync.
+- `docs/stages/NN-*.md`: one file per stage (English only, internal): what it demonstrates, exit criteria, areas and that stage's open decisions.
 - `docs/PRINCIPLES.md`: principles that apply to every stage (Spanish).
 - `docs/WORKFLOW.md`: workflow spec (Spanish): GitHub milestones/issues/labels structure and the test-driven cycle each development issue follows.
 

@@ -1,38 +1,38 @@
-# 🗣️ Consulta individual: llevar la práctica uno a uno
+# 🗣️ Individual sessions: bring in one-on-one practice
 
-← [Roadmap](../ROADMAP.md) · Anterior: [Piloto](04-pilot.md) · Siguiente: [Diferenciadores clínicos](06-clinical.md) →
+← [Roadmap](../ROADMAP.md) · Previous: [Pilot](04-pilot.md) · Next: [Clinical differentiators](06-clinical.md) →
 
-Extender lo construido para talleres a las sesiones individuales, en línea y presenciales.
+Extend what was built for workshops to individual sessions, online and in person.
 
-📍 Milestone: por crear. 🏔️ Issue padre: por crear.
+📍 Milestone: to be created. 🏔️ Parent issue: to be created.
 
-## 🎬 Qué demuestra la etapa
+## 🎬 What the stage demonstrates
 
-- Citas individuales en video, solo audio o presenciales en una sola agenda.
-- Canal con encuadre por paciente, con ruta clara para emergencias y la opción de llevar un mensaje a la próxima sesión.
-- Espacio compartido por sesión: "¿cómo llegas hoy?", notas compartidas, resumen, tarea y próxima cita.
-- PHQ-9, GAD-7 y DASS-21 en sus versiones validadas en español, con calificación automática, gráfica de evolución y aviso al profesional ante reactivos de riesgo, sin acciones automáticas.
-- "Llámame por teléfono" cuando la sesión se corta.
+- Individual video, audio-only or in-person appointments in a single calendar.
+- A boundaried channel per patient, with a clear emergency path and the option to carry a message over to the next session.
+- A shared space per session: "how are you arriving today?", shared notes, summary, homework and next appointment.
+- PHQ-9, GAD-7 and DASS-21 in their validated Spanish versions, with auto-scoring, a trend chart and an alert to the practitioner on risk items, with no automated actions.
+- "Call me by phone" when the session drops.
 
-## ✅ Criterios de salida
+## ✅ Exit criteria
 
-- Todos los IDs de prueba asignados a esta etapa están en verde
-- Un terapeuta puede llevar a todos sus pacientes individuales de principio a fin sin salir de Sinapsis
+- All test IDs assigned to this stage are green
+- A therapist can manage all their individual patients end to end without leaving Sinapsis
 
-## 🧩 Áreas
+## 🧩 Areas
 
-|Área|Issue de desarrollo|IDs de prueba|Issue de pruebas|
+|Area|Development issue|Test IDs|Test issue|
 |---|---|---|---|
-|Agenda única con citas en línea y presenciales (AGE)||||
-|Canal con encuadre por paciente y ruta de emergencias (MSG)||||
-|Espacio compartido por sesión individual (ESP)||||
-|Seguimiento psicométrico (PSI)||||
-|"Llámame por teléfono" (TEL)||||
+|Single calendar with online and in-person appointments (AGE)||||
+|Boundaried channel per patient and emergency path (MSG)||||
+|Shared space per individual session (ESP)||||
+|Psychometric follow-up (PSI)||||
+|"Call me by phone" (TEL)||||
 
-## ❓ Decisiones abiertas
+## ❓ Open decisions
 
-Cada una bloquea las pruebas que dependen de ella.
+Each one blocks the tests that depend on it.
 
-|Decisión|Issue|
+|Decision|Issue|
 |---|---|
-|Versiones en español validadas de cada cuestionario||
+|Validated Spanish versions of each questionnaire||

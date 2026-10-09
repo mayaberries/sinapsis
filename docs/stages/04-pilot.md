@@ -1,39 +1,39 @@
-# 🇲🇽 Piloto en México: demostrar que reduce la carga
+# 🇲🇽 Pilot in Mexico: show that it reduces the workload
 
-← [Roadmap](../ROADMAP.md) · Anterior: [Primera versión](03-v1.md) · Siguiente: [Consulta individual](05-individual.md) →
+← [Roadmap](../ROADMAP.md) · Previous: [First version](03-v1.md) · Next: [Individual sessions](05-individual.md) →
 
-Un grupo pequeño de terapeutas en México usa Sinapsis con sus participantes y pacientes reales, empezando por la primera profesional y sus talleres.
+A small group of therapists in Mexico uses Sinapsis with their real participants and patients, starting with the first practitioner and her workshops.
 
-📍 Milestone: por crear. 🏔️ Issue padre: por crear.
+📍 Milestone: to be created. 🏔️ Parent issue: to be created.
 
-## 🎬 Qué demuestra la etapa
+## 🎬 What the stage demonstrates
 
-Se mide antes y durante el piloto:
+Measured before and during the pilot:
 
-- Asistencia e inasistencias por sesión.
-- Participantes que perdieron la conexión y cuántos se recuperaron con audio o reconexión.
-- Fallas al presentar material.
-- Tiempo administrativo por taller (avisos, cambios, cobros, envío de material).
-- Mensajes recibidos fuera de horario.
-- Opinión de profesionales y participantes sobre qué falta, qué estorba y qué no se entiende.
+- Attendance and no-shows per session.
+- Participants who lost their connection, and how many recovered through audio or reconnection.
+- Failures when presenting material.
+- Administrative time per workshop (reminders, changes, payments, sending material).
+- Messages received outside office hours.
+- Practitioners' and participants' feedback on what's missing, what gets in the way and what's unclear.
 
-## ✅ Criterios de salida
+## ✅ Exit criteria
 
-- Mejora visible en esas métricas
-- Terapeutas que quieran seguir usándolo
+- Visible improvement in those metrics
+- Therapists who want to keep using it
 
-## 🧩 Áreas
+## 🧩 Areas
 
-|Área|Issue de desarrollo|IDs de prueba|Issue de pruebas|
+|Area|Development issue|Test IDs|Test issue|
 |---|---|---|---|
-|Medición de las métricas del piloto (MET)||||
-|Incorporación de nuevas profesionales al piloto||||
-|Correcciones a partir de la retroalimentación||||
+|Measuring the pilot metrics (MET)||||
+|Onboarding new practitioners to the pilot||||
+|Fixes based on feedback||||
 
-## ❓ Decisiones abiertas
+## ❓ Open decisions
 
-Cada una bloquea las pruebas que dependen de ella.
+Each one blocks the tests that depend on it.
 
-|Decisión|Issue|
+|Decision|Issue|
 |---|---|
-|Cómo medir el estado previo al piloto||
+|How to measure the state before the pilot||
