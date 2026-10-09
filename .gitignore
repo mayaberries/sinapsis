@@ -7,3 +7,42 @@
 
 # OS
 .DS_Store
+
+# JetBrains (PyCharm): share the project config (.idea/*.iml, modules.xml,
+# vcs.xml, inspectionProfiles, runConfigurations) so it opens anywhere,
+# but not per-user state or per-machine settings.
+.idea/workspace.xml
+.idea/shelf/
+.idea/tasks.xml
+.idea/usage.statistics.xml
+.idea/dictionaries/
+.idea/httpRequests/
+.idea/dataSources/
+.idea/dataSources.local.xml
+.idea/sqldialects.xml
+.idea/copilot*
+.idea/**/aws.xml
+# misc.xml names the local Python interpreter; each machine sets its own.
+.idea/misc.xml
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+build/
+dist/
+
+# Node / Astro
+node_modules/
+.astro/
+playwright-report/
+test-results/
+
+# Local environment
+.env
+.env.*
+!.env.example
