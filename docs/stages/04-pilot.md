@@ -26,9 +26,9 @@ Measured before and during the pilot:
 
 |Area|Development issue|Test IDs|Test issue|
 |---|---|---|---|
-|Measuring the pilot metrics (MET)||||
-|Onboarding new practitioners to the pilot||||
-|Fixes based on feedback||||
+|Measuring the pilot metrics ([INV](../boards/INV.md))||||
+|Onboarding new practitioners to the pilot ([AUT](../boards/AUT.md))||||
+|Fixes based on feedback ([INV](../boards/INV.md))||||
 
 ## ❓ Open decisions
 

@@ -23,12 +23,12 @@ Cover what generic tools and telehealth tools don't solve.
 
 |Area|Development issue|Test IDs|Test issue|
 |---|---|---|---|
-|Session pacing (RIT)||||
-|Crisis-ready sessions (CRI)||||
-|Modes for couples and families (PAR)||||
-|Children's room (NIN)||||
-|Patient document tray (DOC)||||
-|Import from the practitioner's systems (IMP)||||
+|Session pacing ([SAL](../boards/SAL.md))||||
+|Crisis-ready sessions ([SAL](../boards/SAL.md))||||
+|Modes for couples and families ([SAL](../boards/SAL.md))||||
+|Children's room ([SAL](../boards/SAL.md))||||
+|Patient document tray ([REC](../boards/REC.md))||||
+|Import from the practitioner's systems ([REC](../boards/REC.md))||||
 
 ## ❓ Open decisions
 

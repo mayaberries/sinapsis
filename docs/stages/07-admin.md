@@ -20,9 +20,9 @@ Close the administrative loop without turning into a tax product.
 
 |Area|Development issue|Test IDs|Test issue|
 |---|---|---|---|
-|Payments and CFDI for individual patients (COB)||||
-|Calendar sync and rescheduling (CAL)||||
-|Supervisors and interpreters (SUP)||||
+|Payments and CFDI for individual patients ([COB](../boards/COB.md))||||
+|Calendar sync and rescheduling ([AGE](../boards/AGE.md))||||
+|Supervisors and interpreters ([SAL](../boards/SAL.md))||||
 
 ## ❓ Open decisions
 

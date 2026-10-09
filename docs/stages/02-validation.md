@@ -30,10 +30,10 @@ Confirm with real practitioners what the research only shows qualitatively or wi
 
 |Area|Issue|
 |---|---|
-|Interviews with practitioners||
-|Review of groups and forums||
-|Workshop interview with the pilot's first practitioner||
-|Test workshops with the POC||
+|Interviews with practitioners ([INV](../boards/INV.md))||
+|Review of groups and forums ([INV](../boards/INV.md))||
+|Workshop interview with the pilot's first practitioner ([INV](../boards/INV.md))||
+|Test workshops with the POC ([INV](../boards/INV.md))||
 
 ## ❓ Open decisions
 

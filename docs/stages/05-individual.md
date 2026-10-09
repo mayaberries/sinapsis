@@ -23,11 +23,11 @@ Extend what was built for workshops to individual sessions, online and in person
 
 |Area|Development issue|Test IDs|Test issue|
 |---|---|---|---|
-|Single calendar with online and in-person appointments (AGE)||||
-|Boundaried channel per patient and emergency path (MSG)||||
-|Shared space per individual session (ESP)||||
-|Psychometric follow-up (PSI)||||
-|"Call me by phone" (TEL)||||
+|Single calendar with online and in-person appointments ([AGE](../boards/AGE.md))||||
+|Boundaried channel per patient and emergency path ([MSG](../boards/MSG.md))||||
+|Shared space per individual session ([REC](../boards/REC.md))||||
+|Psychometric follow-up ([PSI](../boards/PSI.md))||||
+|"Call me by phone" ([SES](../boards/SES.md))||||
 
 ## ❓ Open decisions
 

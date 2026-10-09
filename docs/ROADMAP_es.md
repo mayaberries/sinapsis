@@ -4,7 +4,7 @@
 
 > Sinapsis se construye en ocho etapas, en este orden. Las tres primeras se centran en talleres en línea, porque así trabaja la primera profesional del piloto. No hay fechas todavía; cada etapa avanza cuando cumple sus criterios de salida.
 
-Borrador basado en `assets/es/PITCH.md` y `assets/es/RESEARCH.md`. Los [principios y decisiones tomadas](DECISIONS.md) aplican a todas las etapas, y el [flujo de trabajo](WORKFLOW.md) explica cómo cada etapa se vuelve milestones, issues y pruebas. El detalle de cada etapa (qué demuestra, criterios de salida, áreas y decisiones abiertas) está en su propio archivo.
+Borrador basado en `assets/es/PITCH.md` y `assets/es/RESEARCH.md`. Los [principios y decisiones tomadas](DECISIONS.md) aplican a todas las etapas, y el [flujo de trabajo](WORKFLOW.md) explica cómo cada etapa se vuelve milestones, issues y pruebas. Los [tableros](boards/README.md) agrupan ese trabajo por dominio, a través de las etapas. El detalle de cada etapa (qué demuestra, criterios de salida, áreas y decisiones abiertas) está en su propio archivo.
 
 ```mermaid
 ---

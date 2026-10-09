@@ -20,9 +20,9 @@ Bring Sinapsis to other health professions and to the United States.
 
 |Area|Development issue|Test IDs|Test issue|
 |---|---|---|---|
-|Other health professions||||
-|English interface and hybrid practice in the US (I18N)||||
-|Licensed instruments through publishers (LIC)||||
+|Other health professions ([AUT](../boards/AUT.md))||||
+|English interface and hybrid practice in the US ([UIP](../boards/UIP.md))||||
+|Licensed instruments through publishers ([PSI](../boards/PSI.md))||||
 
 ## ❓ Open decisions
 
