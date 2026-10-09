@@ -4,7 +4,7 @@
 
 Build the minimum needed to have material to work with practitioners during validation. Use a test workshop to try what fails most today: participants joining from their phone without installing anything, the group seeing and hearing each other, and material being shown without relying on screen sharing.
 
-📍 Milestone: to be created.
+📍 Milestone: [POC](https://github.com/mayaberries/sinapsis/milestone/1) · label `stage:poc`
 
 ## 🎬 What the stage demonstrates
 

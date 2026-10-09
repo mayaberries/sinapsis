@@ -10,10 +10,12 @@ Sinapsis ("synapse" in Spanish) is at the pre-code stage. The repo contains only
 - `assets/{en,es}/RESEARCH.md`: practitioner pain-point research and a prioritized feature list (Tier 1–3). Treat it as the product spec until a real one exists.
 - `assets/{en,es}/PITCH.md`: product pitch.
 - `docs/ROADMAP.md` (English) and `docs/ROADMAP_es.md` (Spanish): roadmap timeline: the eight stages in order, a few points per stage, and cross-stage open decisions. Keep both in sync.
-- `docs/stages/NN-*.md`: one file per stage (English only, internal): what it demonstrates, exit criteria, areas and that stage's open decisions.
+- `docs/stages/NN-*.md`: one file per stage (English only, internal): what it demonstrates, exit criteria, its stories (each tagged with its board) and that stage's open decisions.
 - `docs/DECISIONS.md`: where to look up why things are built the way they are (English, internal): the principles every stage follows and the technical decisions made (frontend: Astro + Vue, TypeScript PWA; backend: Python/FastAPI with Kalens and Xolo). When an open decision in a stage file is made, record it here and in that stage's "Decisions made".
-- `docs/boards/`: one file per board (English, internal), indexed in `docs/boards/README.md`. Boards group stories by domain across stages; each GitHub issue gets one `board:XXX` label, and the prefix is also the test ID prefix (`XXX-NNN`). Each stage area names its board in parentheses; when an issue is created, add it to its board's tickets table.
-- `docs/WORKFLOW.md`: workflow spec (Spanish): the milestone (stage) → story (area) → task hierarchy on GitHub, and the test-driven cycle each story follows. Only the POC's stories are ordered; later stages get ordered when they start.
+- `docs/boards/`: one file per board (English, internal), indexed in `docs/boards/README.md`. Boards group stories by domain across stages; each GitHub issue gets one `board:XXX` label, and the prefix is also the test ID prefix (`XXX-NNN`). Each story in a stage file names its board in parentheses; when an issue is created, add it to its board's tickets table.
+- `docs/WORKFLOW.md`: workflow spec (English, internal): the shared vocabulary (stage, story, task, board, ticket, test ID; never "area"), how they map to GitHub milestones, issues and labels, and the test-driven cycle each story follows. Only the POC's stories are ordered; later stages get ordered when they start.
+
+GitHub issues follow `docs/WORKFLOW.md`: every story and task has a milestone (its stage), a `stage:` label and one `board:` label; stories also carry `story`, tasks are sub-issues of their story. Use the project skills `create-story`, `create-task` and `close-ticket` to create and close them, so titles, bodies, labels and the board/stage records stay consistent.
 
 The POC depends on two of the user's own libraries: [Kalens](https://github.com/mayaberries/kalens) (scheduling engine, Python/FastAPI/PostgreSQL/Redis; it sets the backend stack and expects the host to provide users and auth) and Xolo (authentication, not created yet; to be extracted from another project). See `docs/stages/01-poc.md`.
 

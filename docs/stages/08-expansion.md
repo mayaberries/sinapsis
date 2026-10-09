@@ -4,7 +4,7 @@
 
 Bring Sinapsis to other health professions and to the United States.
 
-📍 Milestone: to be created.
+📍 Milestone: [Expansion](https://github.com/mayaberries/sinapsis/milestone/8) · label `stage:expansion`
 
 ## 🎬 What the stage demonstrates
 
@@ -16,13 +16,15 @@ Bring Sinapsis to other health professions and to the United States.
 
 - All test IDs assigned to this stage are green
 
-## 🧩 Areas
+## 🧩 Stories
 
-|Area|Development issue|Test IDs|Test issue|
-|---|---|---|---|
-|Other health professions ([AUT](../boards/AUT.md))||||
-|English interface and hybrid practice in the US ([UIP](../boards/UIP.md))||||
-|Licensed instruments through publishers ([PSI](../boards/PSI.md))||||
+Not in build order yet: they're ordered when the stage starts.
+
+|Story|Issue|Test IDs|
+|---|---|---|
+|Other health professions ([AUT](../boards/AUT.md))|||
+|English interface and hybrid practice in the US ([UIP](../boards/UIP.md))|||
+|Licensed instruments through publishers ([PSI](../boards/PSI.md))|||
 
 ## ❓ Open decisions
 

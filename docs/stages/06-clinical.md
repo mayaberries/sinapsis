@@ -4,7 +4,7 @@
 
 Cover what generic tools and telehealth tools don't solve.
 
-📍 Milestone: to be created.
+📍 Milestone: [Clinical differentiators](https://github.com/mayaberries/sinapsis/milestone/6) · label `stage:clinical`
 
 ## 🎬 What the stage demonstrates
 
@@ -19,16 +19,18 @@ Cover what generic tools and telehealth tools don't solve.
 
 - All test IDs assigned to this stage are green
 
-## 🧩 Areas
+## 🧩 Stories
 
-|Area|Development issue|Test IDs|Test issue|
-|---|---|---|---|
-|Session pacing ([SAL](../boards/SAL.md))||||
-|Crisis-ready sessions ([SAL](../boards/SAL.md))||||
-|Modes for couples and families ([SAL](../boards/SAL.md))||||
-|Children's room ([SAL](../boards/SAL.md))||||
-|Patient document tray ([REC](../boards/REC.md))||||
-|Import from the practitioner's systems ([REC](../boards/REC.md))||||
+Not in build order yet: they're ordered when the stage starts.
+
+|Story|Issue|Test IDs|
+|---|---|---|
+|Session pacing ([SAL](../boards/SAL.md))|||
+|Crisis-ready sessions ([SAL](../boards/SAL.md))|||
+|Modes for couples and families ([SAL](../boards/SAL.md))|||
+|Children's room ([SAL](../boards/SAL.md))|||
+|Patient document tray ([REC](../boards/REC.md))|||
+|Import from the practitioner's systems ([REC](../boards/REC.md))|||
 
 ## ❓ Open decisions
 

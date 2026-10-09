@@ -4,7 +4,7 @@
 
 Confirm with real practitioners what the research only shows qualitatively or with vendor data, using the POC as material: practitioners try it instead of imagining it.
 
-📍 Milestone: to be created.
+📍 Milestone: [Validation](https://github.com/mayaberries/sinapsis/milestone/2) · label `stage:validation`
 
 ## 🎬 What the stage demonstrates
 
@@ -26,14 +26,16 @@ Confirm with real practitioners what the research only shows qualitatively or wi
 - A group of therapists willing to join the pilot
 - Changes to the first version's scope based on what the POC showed
 
-## 🧩 Areas
+## 🧩 Stories
 
-|Area|Issue|
-|---|---|
-|Interviews with practitioners ([INV](../boards/INV.md))||
-|Review of groups and forums ([INV](../boards/INV.md))||
-|Workshop interview with the pilot's first practitioner ([INV](../boards/INV.md))||
-|Test workshops with the POC ([INV](../boards/INV.md))||
+Not in build order yet: they're ordered when the stage starts.
+
+|Story|Issue|Test IDs|
+|---|---|---|
+|Interviews with practitioners ([INV](../boards/INV.md))|||
+|Review of groups and forums ([INV](../boards/INV.md))|||
+|Workshop interview with the pilot's first practitioner ([INV](../boards/INV.md))|||
+|Test workshops with the POC ([INV](../boards/INV.md))|||
 
 ## ❓ Open decisions
 

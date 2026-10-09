@@ -4,7 +4,7 @@
 
 A small group of therapists in Mexico uses Sinapsis with their real participants and patients, starting with the first practitioner and her workshops.
 
-📍 Milestone: to be created.
+📍 Milestone: [Pilot](https://github.com/mayaberries/sinapsis/milestone/4) · label `stage:pilot`
 
 ## 🎬 What the stage demonstrates
 
@@ -22,13 +22,15 @@ Measured before and during the pilot:
 - Visible improvement in those metrics
 - Therapists who want to keep using it
 
-## 🧩 Areas
+## 🧩 Stories
 
-|Area|Development issue|Test IDs|Test issue|
-|---|---|---|---|
-|Measuring the pilot metrics ([INV](../boards/INV.md))||||
-|Onboarding new practitioners to the pilot ([AUT](../boards/AUT.md))||||
-|Fixes based on feedback ([INV](../boards/INV.md))||||
+Not in build order yet: they're ordered when the stage starts.
+
+|Story|Issue|Test IDs|
+|---|---|---|
+|Measuring the pilot metrics ([INV](../boards/INV.md))|||
+|Onboarding new practitioners to the pilot ([AUT](../boards/AUT.md))|||
+|Fixes based on feedback ([INV](../boards/INV.md))|||
 
 ## ❓ Open decisions
 

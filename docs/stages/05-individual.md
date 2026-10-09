@@ -4,7 +4,7 @@
 
 Extend what was built for workshops to individual sessions, online and in person.
 
-📍 Milestone: to be created.
+📍 Milestone: [Individual sessions](https://github.com/mayaberries/sinapsis/milestone/5) · label `stage:individual`
 
 ## 🎬 What the stage demonstrates
 
@@ -19,15 +19,17 @@ Extend what was built for workshops to individual sessions, online and in person
 - All test IDs assigned to this stage are green
 - A therapist can manage all their individual patients end to end without leaving Sinapsis
 
-## 🧩 Areas
+## 🧩 Stories
 
-|Area|Development issue|Test IDs|Test issue|
-|---|---|---|---|
-|Single calendar with online and in-person appointments ([AGE](../boards/AGE.md))||||
-|Boundaried channel per patient and emergency path ([MSG](../boards/MSG.md))||||
-|Shared space per individual session ([REC](../boards/REC.md))||||
-|Psychometric follow-up ([PSI](../boards/PSI.md))||||
-|"Call me by phone" ([SES](../boards/SES.md))||||
+Not in build order yet: they're ordered when the stage starts.
+
+|Story|Issue|Test IDs|
+|---|---|---|
+|Single calendar with online and in-person appointments ([AGE](../boards/AGE.md))|||
+|Boundaried channel per patient and emergency path ([MSG](../boards/MSG.md))|||
+|Shared space per individual session ([REC](../boards/REC.md))|||
+|Psychometric follow-up ([PSI](../boards/PSI.md))|||
+|"Call me by phone" ([SES](../boards/SES.md))|||
 
 ## ❓ Open decisions
 

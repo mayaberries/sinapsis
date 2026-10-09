@@ -4,7 +4,7 @@
 
 Close the administrative loop without turning into a tax product.
 
-📍 Milestone: to be created.
+📍 Milestone: [Administrative flow](https://github.com/mayaberries/sinapsis/milestone/7) · label `stage:admin`
 
 ## 🎬 What the stage demonstrates
 
@@ -16,13 +16,15 @@ Close the administrative loop without turning into a tax product.
 
 - All test IDs assigned to this stage are green
 
-## 🧩 Areas
+## 🧩 Stories
 
-|Area|Development issue|Test IDs|Test issue|
-|---|---|---|---|
-|Payments and CFDI for individual patients ([COB](../boards/COB.md))||||
-|Calendar sync and rescheduling ([AGE](../boards/AGE.md))||||
-|Supervisors and interpreters ([SAL](../boards/SAL.md))||||
+Not in build order yet: they're ordered when the stage starts.
+
+|Story|Issue|Test IDs|
+|---|---|---|
+|Payments and CFDI for individual patients ([COB](../boards/COB.md))|||
+|Calendar sync and rescheduling ([AGE](../boards/AGE.md))|||
+|Supervisors and interpreters ([SAL](../boards/SAL.md))|||
 
 ## ❓ Open decisions
 

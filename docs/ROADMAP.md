@@ -4,7 +4,7 @@
 
 > Sinapsis is built in eight stages, in this order. The first three focus on online workshops, because that's how the pilot's first practitioner works. There are no dates yet; each stage moves forward when it meets its exit criteria.
 
-Draft based on `assets/en/PITCH.md` and `assets/en/RESEARCH.md`. The [principles and decisions made](DECISIONS.md) apply to every stage, and the [workflow](WORKFLOW.md) explains how each stage becomes milestones, issues and tests. The [boards](boards/README.md) group that work by domain across stages. Each stage's details (what it demonstrates, exit criteria, areas and open decisions) live in their own file.
+Draft based on `assets/en/PITCH.md` and `assets/en/RESEARCH.md`. The [principles and decisions made](DECISIONS.md) apply to every stage, and the [workflow](WORKFLOW.md) explains how each stage becomes milestones, issues and tests. The [boards](boards/README.md) group that work by domain across stages. Each stage's details (what it demonstrates, exit criteria, stories and open decisions) live in their own file.
 
 ```mermaid
 ---

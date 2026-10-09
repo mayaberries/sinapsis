@@ -23,8 +23,8 @@
 
 ## 📏 Rules
 
-- **One board per issue.** Every story and every task gets exactly one `board:XXX` label, plus its `stage:XXX` label and milestone; stories also carry `story`.
+- **One board per ticket.** Every story and every task gets exactly one `board:XXX` label, plus its `stage:XXX` label and milestone; stories also carry `story`.
 - **Tasks follow their story** unless the task changes another domain; then it takes that board's label instead (for example, a pilot fix to reconnection is `board:SES`).
 - **The prefix is also the test ID prefix.** Test IDs are `XXX-NNN`, numbered per board, so a test ID tells you its board at a glance.
-- **New areas pick an existing board.** Create a new board only when an area fits none of them; add its file here and its label on GitHub.
+- **New stories pick an existing board.** Create a new board only when a story fits none of them; add its file here and its label on GitHub.
 - **Finding work:** by stage, filter `milestone:"POC"`; by board, filter `label:board:SES`; both, combine them.
