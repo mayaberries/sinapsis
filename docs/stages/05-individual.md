@@ -4,7 +4,7 @@
 
 Extend what was built for workshops to individual sessions, online and in person.
 
-📍 Milestone: to be created. 🏔️ Parent issue: to be created.
+📍 Milestone: to be created.
 
 ## 🎬 What the stage demonstrates
 

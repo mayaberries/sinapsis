@@ -4,7 +4,7 @@
 
 A small group of therapists in Mexico uses Sinapsis with their real participants and patients, starting with the first practitioner and her workshops.
 
-📍 Milestone: to be created. 🏔️ Parent issue: to be created.
+📍 Milestone: to be created.
 
 ## 🎬 What the stage demonstrates
 

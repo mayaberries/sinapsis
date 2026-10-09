@@ -4,11 +4,11 @@
 
 Build the minimum needed to have material to work with practitioners during validation. Use a test workshop to try what fails most today: participants joining from their phone without installing anything, the group seeing and hearing each other, and material being shown without relying on screen sharing.
 
-📍 Milestone: to be created. 🏔️ Parent issue: to be created.
+📍 Milestone: to be created.
 
 ## 🎬 What the stage demonstrates
 
-- The practitioner creates a workshop and gets a fixed link.
+- The practitioner signs in, creates a workshop, schedules its sessions and gets a fixed link.
 - Several participants join from low-end Android, with no accounts or installs, and wait in the waiting room.
 - The whole group is visible in a single view, and anyone who loses video stays in the session with audio only.
 - The practitioner uploads images, a video and a PDF before the session and shows them in one click, without screen sharing.
@@ -20,16 +20,26 @@ Build the minimum needed to have material to work with practitioners during vali
 - A test workshop with the pilot's first practitioner is completed without leaving Sinapsis
 - The POC is ready to be shown in the validation interviews
 
-## 🧩 Areas
+## 🧩 Stories
 
-|Area|Development issue|Test IDs|Test issue|
+In build order: each story builds on the ones before it.
+
+|#|Story|Issue|Test IDs|
 |---|---|---|---|
-|Set up the project and the continuous integration pipeline||||
-|Create workshops and their fixed link (TLL)||||
-|Join without an account or install, and waiting room (SES)||||
-|Group video call with audio-only fallback (GRP)||||
-|Upload and present material without screen sharing (MAT)||||
-|Large, clear participant controls, grouped by task with no repeated options (UIP)||||
+|1|App boilerplate: backend, frontend and local environment|||
+|2|Test harness and continuous integration|||
+|3|Practitioner authentication with Xolo (AUT)|||
+|4|Create workshops and their fixed link (TLL)|||
+|5|Schedule workshop sessions with Kalens (AGE)|||
+|6|Join without an account or install, and waiting room (SES)|||
+|7|Group video call with audio-only fallback (GRP)|||
+|8|Upload and present material without screen sharing (MAT)|||
+|9|Large, clear participant controls, grouped by task with no repeated options (UIP)|||
+
+### 🔗 External libraries
+
+- **[Kalens](https://github.com/mayaberries/kalens)** (appointments): the scheduling engine extracted from `pets-appts`. A Python 3.13 / FastAPI library with PostgreSQL, Alembic and Redis, so it sets the backend stack. It owns the `appointments` and `clinic_availability` tables. The host provides users, services, the tenant ("clinic") and the booking's subject, plus its authentication, which is why it comes after Xolo. Its guest users fit participants who join without an account.
+- **Xolo** (authentication): to be created, by extracting the authentication logic of another project into its own repo. Story 3 starts by defining its scope.
 
 ## ❓ Open decisions
 
@@ -37,6 +47,8 @@ Each one blocks the tests that depend on it.
 
 |Decision|Issue|
 |---|---|
-|Platform, stack and test suite||
+|Frontend platform and test suite (Kalens sets the backend: Python, FastAPI, PostgreSQL and Redis)||
+|Xolo's scope and API: what it extracts from the other project, and how it provides the JWT dependency Kalens expects||
+|How a workshop session maps onto Kalens: one appointment has a single subject, and confirmed appointments can't overlap within a clinic, but a session has many participants at the same time||
 |Video provider and how it degrades to audio only||
 |Material formats and maximum size||

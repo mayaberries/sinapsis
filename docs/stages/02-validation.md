@@ -4,7 +4,7 @@
 
 Confirm with real practitioners what the research only shows qualitatively or with vendor data, using the POC as material: practitioners try it instead of imagining it.
 
-📍 Milestone: to be created. 🏔️ Parent issue: to be created.
+📍 Milestone: to be created.
 
 ## 🎬 What the stage demonstrates
 

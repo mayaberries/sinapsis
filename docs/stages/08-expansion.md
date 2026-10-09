@@ -4,7 +4,7 @@
 
 Bring Sinapsis to other health professions and to the United States.
 
-📍 Milestone: to be created. 🏔️ Parent issue: to be created.
+📍 Milestone: to be created.
 
 ## 🎬 What the stage demonstrates
 

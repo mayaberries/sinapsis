@@ -4,7 +4,7 @@
 
 Close the administrative loop without turning into a tax product.
 
-📍 Milestone: to be created. 🏔️ Parent issue: to be created.
+📍 Milestone: to be created.
 
 ## 🎬 What the stage demonstrates
 
