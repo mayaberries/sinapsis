@@ -33,7 +33,7 @@ NODE_MIN_VERSION="22.12.0"
 SERVICES=(postgres redis)
 
 # Ordered list of valid step names; also the "run everything" default.
-ALL_STEPS=(docker make uv python node pnpm deps services)
+ALL_STEPS=(docker make uv python node pnpm deps browsers services)
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BLUE='\033[0;34m'; NC='\033[0m'
 
@@ -388,6 +388,41 @@ step_deps() {
 }
 
 # ---------------------------------------------------------------------------
+# Every Playwright version pins its own browser builds; they're downloaded
+# once into Playwright's cache (~/Library/Caches/ms-playwright on macOS), not
+# into the repo.
+playwright_browsers_missing() {
+    (cd "$REPO_ROOT/frontend" && pnpm exec playwright install --dry-run chromium 2>/dev/null) \
+        | sed -n 's/^ *Install location: *//p' \
+        | while read -r dir; do [[ -d "$dir" ]] || echo "$dir"; done
+}
+
+step_browsers() {
+    step_header "Playwright's Chromium (end-to-end tests)"
+
+    if ! ensure_node_on_path || ! command -v pnpm &>/dev/null \
+        || [[ ! -x "$REPO_ROOT/frontend/node_modules/.bin/playwright" ]]; then
+        if $CHECK_ONLY; then warn "frontend dependencies not installed; can't check the browsers"; else fail_step "frontend dependencies not installed; run the 'deps' step first"; fi
+        return
+    fi
+
+    local missing
+    missing="$(playwright_browsers_missing)"
+    if [[ -z "$missing" ]]; then
+        ok "Chromium for Playwright installed"
+    elif $CHECK_ONLY; then
+        warn "Chromium for Playwright not installed"
+    else
+        (cd "$REPO_ROOT/frontend" && run pnpm test:e2e:install)
+        if [[ -z "$(playwright_browsers_missing)" ]]; then
+            ok "Chromium for Playwright installed"
+        else
+            fail_step "Playwright's browser download failed; run \`cd frontend && pnpm test:e2e:install\` to see why"
+        fi
+    fi
+}
+
+# ---------------------------------------------------------------------------
 compose() { (cd "$REPO_ROOT" && run docker compose "$@"); }
 
 service_running() {
@@ -475,6 +510,7 @@ else
         echo "Next steps:"
         echo "  open a new terminal (or source your shell's rc file) if anything was installed"
         echo "  make dev                     # backend on :8000, frontend on :4321"
+        echo "  make test                    # backend, component and end-to-end tests"
         echo "  open http://localhost:8000/health"
     fi
 fi

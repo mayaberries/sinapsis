@@ -31,7 +31,14 @@ Needs Docker; the setup script installs the rest. Run `make help` for the full l
 - `make migrate`: apply the backend's Alembic migrations (`cd backend && uv run alembic revision -m "..."` to add one)
 - `make gen-api`: export the backend's OpenAPI schema to `frontend/openapi.json` and regenerate the typed client (`frontend/src/lib/api/schema.d.ts`). Run it after changing the API.
 
-There is no test suite yet; story #2 adds pytest, Vitest, Playwright and CI. When it lands, add here how to run a single test.
+- `make test`: every suite. One at a time: `make test-backend` (pytest, against `<db>_test`, which the migrations recreate per session; every test's writes are rolled back), `make test-unit` (Vitest + Vue Test Utils) and `make test-e2e` (Playwright on the production build, Moto G4 profile).
+- **One test case:** tests are named by their test ID, so `make test-backend K=plt_002` (pytest `-k`), `make test-unit K=PLT-006` (`-t`) or `make test-e2e K=PLT-005` (`--grep`). Directly: `cd backend && uv run pytest -k plt_002`, `cd frontend && pnpm test:unit -t PLT-006`.
+
+**Test layout:**
+- `backend/tests/`: vetted's structure, mirroring `app/`. `tests/modules/<name>/` and `tests/shared/` hold the tests (`test_plt_002_...`). `tests/_fixtures/` holds the fixtures, registered in `conftest.py`: `app`, `client`, `db`, `redis`, and `override_dependency` for faking a dependency. `tests/_helpers/` holds the plain helpers. `conftest.py` sets `TESTING=1` before importing the app, and aborts the session with one message if PostgreSQL or Redis is down.
+- `frontend/tests/unit/` mirrors `src/`. Mount islands with `testingPinia()` from `tests/unit/_helpers/pinia.ts`.
+- `frontend/tests/e2e/` holds the end-to-end tests (`*.spec.ts`), which import `test`/`expect` from `tests/e2e/fixtures.ts`. `test.use({ realConditions: true })` adds the real-conditions profile (4× CPU, slow 3G) through CDP.
+- Test titles start with the ID: `test("PLT-005: …")`.
 
 ## Architecture
 

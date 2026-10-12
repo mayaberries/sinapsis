@@ -39,6 +39,7 @@ If the script installed anything, open a new terminal before `make dev`.
 |`node`|Node 22.12 or later (`.nvmrc`)|nvm, if needed, and that Node through it|
 |`pnpm`|The pnpm pinned in `frontend/package.json`|That pnpm, through Corepack|
 |`deps`|`backend/.venv` and `frontend/node_modules` match their lockfiles|Both|
+|`browsers`|Playwright's Chromium, for the end-to-end tests|It, into Playwright's cache|
 |`services`|PostgreSQL and Redis are running, and the ports are free|Starts them and applies the migrations|
 
 No `.env` is needed: every default matches `docker-compose.yml`. To change a port or a credential, copy `.env.example` to `.env` and edit it.
@@ -57,6 +58,7 @@ Run `make help` for the full list.
 |---|---|
 |`make dev`|Start everything (PostgreSQL and Redis too, if they're stopped)|
 |`make doctor`|Check the prerequisites and services without changing anything|
+|`make test`|Run the backend, component and end-to-end tests (`make test-backend`, `make test-unit` or `make test-e2e` for one suite)|
 |`make backend` / `make frontend`|Run only one side|
 |`make migrate`|Apply new database migrations|
 |`make gen-api`|Regenerate the frontend's typed API client after changing the API|

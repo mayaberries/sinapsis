@@ -1,8 +1,8 @@
 .DEFAULT_GOAL := help
-.PHONY: help setup doctor dev services-up services-down services-reset backend frontend migrate gen-api lint format typecheck
+.PHONY: help setup doctor dev test test-backend test-unit test-e2e services-up services-down services-reset backend frontend migrate gen-api lint format typecheck
 
 help: ## Show this help
-	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "} {printf "  %-15s %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z0-9_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "} {printf "  %-15s %s\n", $$1, $$2}'
 
 setup: ## Check and install the prerequisites, then dependencies, services and migrations (scripts/setup.sh)
 	./scripts/setup.sh
@@ -46,6 +46,17 @@ format: ## Format the backend with Ruff and fix ESLint issues on the frontend
 	cd backend && uv run ruff format . && uv run ruff check --fix .
 	cd frontend && pnpm lint --fix
 
+test: test-backend test-unit test-e2e ## Run every test suite
+
+test-backend: services-up ## pytest against PostgreSQL and Redis (one case: make test-backend K=plt_002)
+	cd backend && uv run pytest $(if $(K),-k $(K))
+
+test-unit: ## Vitest component tests (one case: make test-unit K=PLT-006)
+	cd frontend && pnpm test:unit $(if $(K),-t $(K))
+
+test-e2e: ## Playwright on the production build, Moto G4 profile (one case: make test-e2e K=PLT-005)
+	cd frontend && pnpm test:e2e $(if $(K),--grep $(K))
+
 typecheck: ## mypy on the backend, astro check and vue-tsc on the frontend
-	cd backend && uv run mypy app
+	cd backend && uv run mypy app tests
 	cd frontend && pnpm typecheck
