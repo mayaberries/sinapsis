@@ -17,6 +17,8 @@ from tests._helpers.infra import (
     unreachable_redis,
 )
 
+pytestmark = pytest.mark.sanity
+
 UNREACHABLE: dict[str, tuple[Callable[..., Any], Callable[[], Any]]] = {
     "postgres": (get_database, unreachable_database),
     "redis": (get_redis, unreachable_redis),

@@ -36,16 +36,6 @@ package = false
 [tool.uv.sources]
 kalens = { git = "https://github.com/mayaberries/kalens.git", tag = "v0.1.0-alpha.2" }
 
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-asyncio_mode = "auto"
-# Every async test and fixture shares one event loop for the session, so the
-# session-scoped fixtures (migrations, the infra check) and the tests run on
-# the same loop.
-asyncio_default_fixture_loop_scope = "session"
-asyncio_default_test_loop_scope = "session"
-addopts = ["--strict-markers", "--strict-config"]
-
 [tool.ruff]
 line-length = 100
 target-version = "py313"

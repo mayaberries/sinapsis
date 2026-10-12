@@ -10,7 +10,7 @@ function mountRoom() {
   return mount(SessionRoom, { global: { plugins: [testingPinia({ stubActions: false })] } });
 }
 
-describe("SessionRoom", () => {
+describe("SessionRoom", { tags: ["sanity"] }, () => {
   afterEach(() => {
     $online.set(true);
   });

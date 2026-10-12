@@ -3,7 +3,7 @@ import { describe, expectTypeOf, it } from "vitest";
 import { api } from "../../../../src/lib/api/client";
 
 // Type tests: checked by the compiler (`vitest --typecheck`), never run.
-describe("the typed API client", () => {
+describe("the typed API client", { tags: ["sanity"] }, () => {
   it("PLT-007: knows the health route and its response", async () => {
     type Health = {
       status: "ok" | "unavailable";

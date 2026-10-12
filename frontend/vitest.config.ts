@@ -8,6 +8,14 @@ export default getViteConfig({
   test: {
     environment: "happy-dom",
     include: ["tests/unit/**/*.test.ts"],
+    // Tags a test can carry (`{ tags: ["sanity"] }`); an undeclared tag is an
+    // error. Run one with `--tags-filter sanity`.
+    tags: [
+      {
+        name: "sanity",
+        description: "Quick checks that the platform itself works (islands, the typed API client).",
+      },
+    ],
     typecheck: {
       enabled: true,
       include: ["tests/unit/**/*.test-d.ts"],

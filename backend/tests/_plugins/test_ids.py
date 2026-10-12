@@ -7,6 +7,7 @@ its story (`docs/WORKFLOW.md`).
 
     pytestmark = pytest.mark.test_id("PLT-003")   # every test in the module
 
+- The marker itself is registered in pytest.ini, with the others.
 - IDs are checked at collection: anything that isn't `XXX-NNN` stops the run.
 - `pytest --test-id PLT-002` (repeatable) runs only the tests with that ID.
 - Each ID is added to the test's `user_properties`, so it shows up in JUnit
@@ -30,12 +31,6 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         default=[],
         metavar="XXX-NNN",
         help="Only run tests marked with this test ID (repeatable).",
-    )
-
-
-def pytest_configure(config: pytest.Config) -> None:
-    config.addinivalue_line(
-        "markers", f"{MARKER}(*ids): the story test case IDs (XXX-NNN) this test proves."
     )
 
 

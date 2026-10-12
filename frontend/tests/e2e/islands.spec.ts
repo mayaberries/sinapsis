@@ -2,7 +2,7 @@ import { expect, test } from "./fixtures";
 
 const SESSION_ROOM_CHUNK = /\/_astro\/SessionRoom\.[^/]+\.js$/;
 
-test.describe("the session room island", () => {
+test.describe("the session room island", { tag: "@sanity" }, () => {
   // Participants join from low-end phones on weak connections.
   test.use({ realConditions: true });
 
@@ -16,7 +16,7 @@ test.describe("the session room island", () => {
   });
 });
 
-test.describe("the session room's code", () => {
+test.describe("the session room's code", { tag: "@sanity" }, () => {
   test("PLT-006: loads on its page", async ({ page, scriptRequests }) => {
     await page.goto("/session/demo");
     await page.waitForLoadState("networkidle");

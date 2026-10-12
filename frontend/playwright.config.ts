@@ -9,6 +9,10 @@ const baseURL = `http://127.0.0.1:${PORT}`;
  * docs/DECISIONS.md: a Moto G4. Tests that need the real-conditions profile
  * (4× CPU, slow 3G) opt in with `test.use({ realConditions: true })`; see
  * tests/e2e/fixtures.ts.
+ *
+ * Tags: `@sanity` marks quick checks that the platform itself works (run them
+ * alone with `--grep @sanity`). Unlike Vitest's, Playwright's tags aren't
+ * declared anywhere; keep to the ones Vitest and pytest.ini declare.
  */
 export default defineConfig({
   testDir: "tests/e2e",

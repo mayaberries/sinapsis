@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: help setup doctor dev test test-backend test-unit test-e2e services-up services-down services-reset backend frontend migrate gen-api lint format typecheck
+.PHONY: help setup doctor dev test test-sanity test-backend test-unit test-e2e services-up services-down services-reset backend frontend migrate gen-api lint format typecheck
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z0-9_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "} {printf "  %-15s %s\n", $$1, $$2}'
@@ -47,6 +47,11 @@ format: ## Format the backend with Ruff and fix ESLint issues on the frontend
 	cd frontend && pnpm lint --fix
 
 test: test-backend test-unit test-e2e ## Run every test suite (one test case in all of them: ID=PLT-006)
+
+test-sanity: services-up ## Only the sanity tests (the platform works), in every suite
+	cd backend && uv run pytest -m sanity
+	cd frontend && pnpm test:unit --tags-filter sanity
+	cd frontend && pnpm test:e2e --grep @sanity
 
 test-backend: services-up ## pytest against PostgreSQL and Redis (one test case: ID=PLT-002)
 	@# With ID, "no test has it" (pytest's exit code 5) isn't a failure: the case may live in another suite.

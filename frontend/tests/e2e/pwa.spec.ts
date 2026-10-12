@@ -2,7 +2,7 @@ import { expect, test } from "./fixtures";
 
 type ManifestIcon = { src: string; sizes: string; type: string; purpose?: string };
 
-test.describe("the installable app", () => {
+test.describe("the installable app", { tag: "@sanity" }, () => {
   test("PLT-008: has a valid web app manifest", async ({ page, request }) => {
     await page.goto("/");
     const href = await page.locator('link[rel="manifest"]').getAttribute("href");

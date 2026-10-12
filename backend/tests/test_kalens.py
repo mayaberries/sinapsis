@@ -9,6 +9,8 @@ from typing import Any
 
 import pytest
 
+pytestmark = pytest.mark.sanity
+
 KALENS_REPO = "https://github.com/mayaberries/kalens.git"
 KALENS_TAG = "v0.1.0-alpha.2"
 UV_LOCK = Path(__file__).resolve().parents[1] / "uv.lock"

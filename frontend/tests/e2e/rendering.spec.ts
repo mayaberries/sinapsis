@@ -1,6 +1,6 @@
 import { expect, test } from "./fixtures";
 
-test.describe("a page with no island", () => {
+test.describe("a page with no island", { tag: "@sanity" }, () => {
   test("PLT-005: is rendered on the server", async ({ request }) => {
     // Raw HTML, no browser: the content must already be there.
     const response = await request.get("/");
