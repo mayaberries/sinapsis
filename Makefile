@@ -1,13 +1,14 @@
 .DEFAULT_GOAL := help
-.PHONY: help setup dev services-up services-down services-reset backend frontend migrate gen-api lint format typecheck
+.PHONY: help setup doctor dev services-up services-down services-reset backend frontend migrate gen-api lint format typecheck
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "} {printf "  %-15s %s\n", $$1, $$2}'
 
-setup: services-up ## Start PostgreSQL and Redis, install backend and frontend dependencies, run migrations
-	cd backend && uv sync
-	cd frontend && pnpm install
-	$(MAKE) migrate
+setup: ## Check and install the prerequisites, then dependencies, services and migrations (scripts/setup.sh)
+	./scripts/setup.sh
+
+doctor: ## Report what's missing or misconfigured, without installing anything
+	./scripts/setup.sh --check
 
 dev: services-up ## Run the backend (:8000) and the frontend (:4321) with reload; Ctrl+C stops both
 	@trap 'kill 0' INT TERM EXIT; \

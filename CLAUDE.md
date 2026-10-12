@@ -23,9 +23,9 @@ The POC depends on two of the user's own libraries: [Kalens](https://github.com/
 
 ## Commands
 
-Requires Docker, [uv](https://docs.astral.sh/uv/), pnpm and Node 22.12+. Run `make help` for the full list. Configuration defaults match Docker Compose; copy `.env.example` to `.env` only to change something.
+Needs Docker; the setup script installs the rest. Run `make help` for the full list. Node, pnpm and Python versions are pinned in `.nvmrc`, `frontend/package.json` (`packageManager`) and `backend/.python-version`. Configuration defaults match Docker Compose; copy `.env.example` to `.env` only to change something.
 
-- `make setup`: start PostgreSQL and Redis (Docker Compose), install both sides' dependencies, run migrations
+- `./scripts/setup.sh` (or `make setup`): check and install the prerequisites (uv, Python, Node through nvm, pnpm through Corepack), then both sides' dependencies, PostgreSQL and Redis, and migrations. `--check` (`make doctor`) only reports; `--step <name>` runs one step. It's bash 3.2 compatible (macOS's default) and never runs sudo.
 - `make dev`: run the backend (http://localhost:8000, `GET /health`) and the frontend (http://localhost:4321) with reload
 - `make lint` / `make format` / `make typecheck`: Ruff and mypy on the backend; ESLint, `astro check` and `vue-tsc` on the frontend
 - `make migrate`: apply the backend's Alembic migrations (`cd backend && uv run alembic revision -m "..."` to add one)
