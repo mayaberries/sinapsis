@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project state
 
-Sinapsis ("synapse" in Spanish) is at the pre-code stage. The repo contains only documentation:
+Sinapsis ("synapse" in Spanish) is at the POC stage. The app lives in `backend/` and `frontend/`; the rest of the repo is documentation:
 
-- `README.md`: product vision and core entities.
+- `README.md`: product vision, core entities and how to run the app from a fresh clone.
 - `assets/{en,es}/RESEARCH.md`: practitioner pain-point research and a prioritized feature list (Tier 1–3). Treat it as the product spec until a real one exists.
 - `assets/{en,es}/PITCH.md`: product pitch.
 - `docs/ROADMAP.md` (English) and `docs/ROADMAP_es.md` (Spanish): roadmap timeline: the eight stages in order, a few points per stage, and cross-stage open decisions. Keep both in sync.
@@ -21,7 +21,30 @@ The POC depends on two of the user's own libraries: [Kalens](https://github.com/
 
 `assets/en` and `assets/es` hold the same documents in English and Spanish; when one changes, update its counterpart. The repo is also an Obsidian vault (`.obsidian/` config is tracked, workspace state is not).
 
-There is no build system, language, framework, or test suite yet. When one is added, update this file with build/lint/test commands, including how to run a single test.
+## Commands
+
+Requires Docker, [uv](https://docs.astral.sh/uv/), pnpm and Node 22.12+. Run `make help` for the full list. Configuration defaults match Docker Compose; copy `.env.example` to `.env` only to change something.
+
+- `make setup`: start PostgreSQL and Redis (Docker Compose), install both sides' dependencies, run migrations
+- `make dev`: run the backend (http://localhost:8000, `GET /health`) and the frontend (http://localhost:4321) with reload
+- `make lint` / `make format` / `make typecheck`: Ruff and mypy on the backend; ESLint, `astro check` and `vue-tsc` on the frontend
+- `make migrate`: apply the backend's Alembic migrations (`cd backend && uv run alembic revision -m "..."` to add one)
+- `make gen-api`: export the backend's OpenAPI schema to `frontend/openapi.json` and regenerate the typed client (`frontend/src/lib/api/schema.d.ts`). Run it after changing the API.
+
+There is no test suite yet; story #2 adds pytest, Vitest, Playwright and CI. When it lands, add here how to run a single test.
+
+## Architecture
+
+**Backend** (`backend/app/`), FastAPI on PostgreSQL through `databases` with raw SQL (the same stack and pinned versions as Kalens, which reads the pool from `app.state._db`). Each request goes through four layers:
+
+- `api/routes/`: thin; parse the request, call a service. Infrastructure routes (`/health`) mount at the root, product routes under `/api`.
+- `api/dependencies/`: wiring. `get_database`, `get_redis`, `get_repository(Repo)`, one `get_<x>_service` per service, plus path lookups and permission checks. Expose them as `Annotated` aliases (`DatabaseDep`, `HealthServiceDep`).
+- `services/`: business rules. They raise the domain errors in `core/errors.py` (`NotFoundError`, `PermissionDeniedError`, `ConflictError`), never `HTTPException`; `main.py` maps them to status codes.
+- `db/repositories/`: SQL only, returning models in `models/` or `None`.
+
+`core/lifespan.py` creates the database and Redis clients without failing when either is down, so `/health` can report it (503, naming the failing dependency).
+
+**Frontend** (`frontend/`), Astro with the Node adapter: pages render on the server and ship no JavaScript unless they hold an island. Vue islands get Pinia from `src/app.ts`; state shared across islands goes in nanostores (`src/shared/`). The session room is one `client:only="vue"` island (`src/islands/`). The PWA is a hand-written `public/manifest.webmanifest` and `public/sw.js`, which never caches HTML or the API. TypeScript is pinned to `~6.0` until vue-tsc, `astro check` and typescript-eslint support 7.
 
 ## Product summary
 

@@ -15,6 +15,55 @@
 |🗂️ [Boards](docs/boards/README.md)|Stories and tickets grouped by domain across stages|
 |📅 [Kalens](https://github.com/mayaberries/kalens)|The scheduling engine the backend is built on|
 
+## 🚀 Getting started
+
+### Prerequisites
+
+|Tool|Why|Install|
+|---|---|---|
+|[Docker](https://docs.docker.com/get-docker/) with Compose|Runs PostgreSQL and Redis|Docker Desktop, or your distro's packages|
+|[uv](https://docs.astral.sh/uv/)|Backend dependencies; it downloads Python 3.13 if you don't have it|`brew install uv` or `curl -LsSf https://astral.sh/uv/install.sh \| sh`|
+|Node 22.12+|Frontend|`brew install node@22`, nvm or fnm|
+|[pnpm](https://pnpm.io/)|Frontend dependencies|`corepack enable pnpm` (uses the version pinned in `frontend/package.json`)|
+|make|Runs the setup and dev commands|Preinstalled on macOS and most Linux distros|
+
+### First run
+
+```bash
+git clone https://github.com/mayaberries/sinapsis.git
+cd sinapsis
+make setup   # starts PostgreSQL and Redis, installs both sides' dependencies, runs migrations
+make dev     # runs the backend and the frontend with reload; Ctrl+C stops both
+```
+
+No `.env` is needed: every default matches `docker-compose.yml`. To change a port or a credential, copy `.env.example` to `.env` and edit it.
+
+Check that it's working:
+
+- Backend health: http://localhost:8000/health should answer `{"status":"ok","checks":{"postgres":"ok","redis":"ok"}}`
+- API docs: http://localhost:8000/docs
+- Frontend: http://localhost:4321, and the session room placeholder at http://localhost:4321/session/demo
+
+### Everyday commands
+
+Run `make help` for the full list.
+
+|Command|What it does|
+|---|---|
+|`make dev`|Start everything (PostgreSQL and Redis too, if they're stopped)|
+|`make backend` / `make frontend`|Run only one side|
+|`make migrate`|Apply new database migrations|
+|`make gen-api`|Regenerate the frontend's typed API client after changing the API|
+|`make lint` / `make format` / `make typecheck`|Ruff and mypy on the backend; ESLint, `astro check` and `vue-tsc` on the frontend|
+|`make services-down`|Stop PostgreSQL and Redis, keeping their data|
+|`make services-reset`|Delete PostgreSQL and Redis and their data, then run `make setup` again for a clean database|
+
+### Troubleshooting
+
+- **Port already in use (5432, 6379, 8000 or 4321):** set `POSTGRES_PORT` or `REDIS_PORT` in `.env`, and update `DATABASE_URL` or `REDIS_URL` to match. For the backend or frontend, stop whatever else is running on that port.
+- **`/health` answers 503:** the response names the dependency that's down. Check `docker compose ps`, then `make services-up`. The backend reconnects on its own, so there's no need to restart it.
+- **`pnpm: command not found`:** run `corepack enable pnpm`, and check that `node --version` is 22.12 or later.
+
 ## 😣 Pain points
 
 From the [research](assets/en/RESEARCH.md):
