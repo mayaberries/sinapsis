@@ -19,6 +19,30 @@ They apply to every stage of the roadmap.
 
 Newest first. Each one says when it was made, what was decided, why, and what it implies.
 
+### Repo layout, tooling and the real-conditions profile
+
+*POC · 2026-10-09*
+
+**Decision**
+
+- One repo, with the app in `backend/` and `frontend/` next to the docs.
+- **Local environment:** Docker Compose for PostgreSQL and Redis; uv for the backend's Python and pnpm for the frontend.
+- **Lint and type checks:** Ruff and mypy on the backend, ESLint and vue-tsc on the frontend.
+- **CI:** GitHub Actions runs lint, type checks and the three test suites on every pull request to `main`, and a failure blocks the merge.
+- **Real-conditions profile:** Playwright's Moto G4 device, 4× CPU throttling and a slow 3G-like connection (about 400 kbps down and up, 400 ms latency).
+
+**Why**
+
+- The docs and the app change together while the product takes shape, so keeping them in one repo keeps stories, decisions and code in step.
+- uv and pnpm are fast and lock dependencies exactly, and Compose gives everyone the same PostgreSQL and Redis that Kalens needs.
+- Ruff, mypy, ESLint and vue-tsc are the standard tools for this stack, and the code is already typed end to end through the OpenAPI client.
+- A single, fixed profile makes "low-end Android with a limited connection" something every story can test the same way.
+
+**Implies**
+
+- Every story that affects patients or participants gets an end-to-end test on this profile, besides checking it on a real device before it closes.
+- If the pilot shows a different typical device or connection, the profile changes here first.
+
 ### Frontend: a TypeScript web app with Astro and Vue
 
 *POC · 2026-10-09*

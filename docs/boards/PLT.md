@@ -10,10 +10,10 @@ The app's foundations: repo layout, backend and frontend boilerplate, local envi
 
 ## 🧩 Stories by stage
 
-|Stage|Story|Issue|
-|---|---|---|
-|[POC](../stages/01-poc.md)|App boilerplate: FastAPI backend, Astro + Vue frontend and local environment||
-|[POC](../stages/01-poc.md)|Test harness (pytest, Vitest, Playwright) and continuous integration||
+| Stage                      | Story                                                                        | Issue |
+| -------------------------- | ---------------------------------------------------------------------------- | ----- |
+| [POC](../stages/01-poc.md) | App boilerplate: FastAPI backend, Astro + Vue frontend and local environment |       |
+| [POC](../stages/01-poc.md) | Test harness (pytest, Vitest, Playwright) and continuous integration         |       |
 
 ## 🎫 Tickets
 
@@ -21,3 +21,5 @@ Every story and task labeled `board:PLT`, newest first.
 
 |Issue|Type|Stage|Status|Test IDs|
 |---|---|---|---|---|
+|[#2](https://github.com/mayaberries/sinapsis/issues/2)|story|POC|open||
+|[#1](https://github.com/mayaberries/sinapsis/issues/1)|story|POC|open||

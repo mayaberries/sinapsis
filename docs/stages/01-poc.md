@@ -26,8 +26,8 @@ In build order: each story builds on the ones before it.
 
 | #   | Story                                                                                                  | Issue | Test IDs |
 | --- | ------------------------------------------------------------------------------------------------------ | ----- | -------- |
-| 1   | App boilerplate: FastAPI backend, Astro + Vue frontend and local environment ([PLT](../boards/PLT.md)) |       |          |
-| 2   | Test harness (pytest, Vitest, Playwright) and continuous integration ([PLT](../boards/PLT.md))         |       |          |
+| 1   | App boilerplate: FastAPI backend, Astro + Vue frontend and local environment ([PLT](../boards/PLT.md)) | [#1](https://github.com/mayaberries/sinapsis/issues/1) |          |
+| 2   | Test harness (pytest, Vitest, Playwright) and continuous integration ([PLT](../boards/PLT.md))         | [#2](https://github.com/mayaberries/sinapsis/issues/2) |          |
 | 3   | Practitioner authentication with Xolo ([AUT](../boards/AUT.md))                                        |       |          |
 | 4   | Create workshops and their fixed link ([AGE](../boards/AGE.md))                                        |       |          |
 | 5   | Schedule workshop sessions with Kalens ([AGE](../boards/AGE.md))                                       |       |          |
@@ -48,6 +48,8 @@ The full reasoning for each one is in [decisions](../DECISIONS.md).
 - **Frontend:** a TypeScript web app (PWA) with Astro; the session room is a single Vue island.
 - **Tests:** `pytest` on the backend, Vitest for components, Playwright end to end with Android emulation and network throttling.
 - **Backend:** Python, FastAPI, PostgreSQL and Redis, set by Kalens.
+- **Repo and tooling:** `backend/` and `frontend/` in this repo, Docker Compose for PostgreSQL and Redis, uv and pnpm; Ruff and mypy, ESLint and vue-tsc; GitHub Actions for CI.
+- **Real conditions:** the end-to-end reference profile is Playwright's Moto G4 with 4× CPU throttling and a slow 3G-like connection.
 
 ## ❓ Open decisions
 
