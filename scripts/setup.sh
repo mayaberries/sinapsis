@@ -8,7 +8,8 @@
 # with the command to run yourself.
 #
 #   ./scripts/setup.sh                       # run every step
-#   ./scripts/setup.sh --check               # report status only, install nothing
+#   ./scripts/setup.sh --check               # report status only, install nothing;
+#                                            # exits 1 if anything is missing
 #   ./scripts/setup.sh --step node,pnpm      # run only these steps, comma-separated
 #   ./scripts/setup.sh --list                # print the step names and exit
 #   ./scripts/setup.sh --verbose             # show every command as it runs
@@ -33,7 +34,7 @@ NODE_MIN_VERSION="22.12.0"
 SERVICES=(postgres redis)
 
 # Ordered list of valid step names; also the "run everything" default.
-ALL_STEPS=(docker make uv python node pnpm deps services)
+ALL_STEPS=(docker make uv python node pnpm deps browsers services)
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BLUE='\033[0;34m'; NC='\033[0m'
 
@@ -46,6 +47,16 @@ run()  { if $VERBOSE; then echo -e "${BLUE}  \$ $*${NC}"; fi; "$@"; }
 FAILED_STEPS=()
 fail_step() { err "$1"; FAILED_STEPS+=("$CURRENT_STEP"); }
 
+# Something this step would install or start. With --check it also makes the
+# run exit 1, and the summary names the steps that fix it.
+MISSING_STEPS=()
+missing() {
+    warn "$1"
+    if $CHECK_ONLY && [[ " ${MISSING_STEPS[*]-} " != *" $CURRENT_STEP "* ]]; then
+        MISSING_STEPS+=("$CURRENT_STEP")
+    fi
+}
+
 os_name() { uname -s; }
 
 # `version_gte 22.23.1 22.12.0` succeeds if the first is >= the second.
@@ -55,6 +66,8 @@ version_gte() {
 
 node_version_wanted() { tr -d '[:space:]v' < "$REPO_ROOT/.nvmrc" 2>/dev/null || echo "22"; }
 python_version_wanted() { tr -d '[:space:]' < "$REPO_ROOT/backend/.python-version" 2>/dev/null || echo "3.13"; }
+pnpm_version_in_frontend() { (cd "$REPO_ROOT/frontend" && pnpm --version 2>/dev/null); }
+
 pnpm_version_wanted() {
     # "packageManager": "pnpm@10.34.7" -> 10.34.7
     grep -o '"packageManager": *"pnpm@[^"]*"' "$REPO_ROOT/frontend/package.json" 2>/dev/null \
@@ -228,7 +241,7 @@ step_uv() {
         return
     fi
     if $CHECK_ONLY; then
-        warn "uv not installed"
+        missing "uv not installed"
         return
     fi
 
@@ -253,7 +266,7 @@ step_python() {
 
     ensure_local_bin_on_path
     if ! command -v uv &>/dev/null; then
-        if $CHECK_ONLY; then warn "uv not installed; can't check Python"; else fail_step "uv not found; run the 'uv' step first"; fi
+        if $CHECK_ONLY; then missing "uv not installed; can't check Python"; else fail_step "uv not found; run the 'uv' step first"; fi
         return
     fi
 
@@ -262,7 +275,7 @@ step_python() {
     if uv python find --system "$wanted" &>/dev/null; then
         ok "Python $wanted found: $(uv python find --system "$wanted")"
     elif $CHECK_ONLY; then
-        warn "Python $wanted not installed"
+        missing "Python $wanted not installed"
     else
         run uv python install "$wanted"
         ok "Python $wanted installed"
@@ -284,9 +297,9 @@ step_node() {
     fi
 
     if command -v node &>/dev/null; then
-        warn "Node $(node -v) is older than $NODE_MIN_VERSION"
+        missing "Node $(node -v) is older than $NODE_MIN_VERSION"
     else
-        warn "Node not found"
+        missing "Node not found"
     fi
     if $CHECK_ONLY; then return; fi
 
@@ -315,14 +328,25 @@ step_pnpm() {
     step_header "pnpm $wanted (frontend dependencies)"
 
     ensure_local_bin_on_path
-    if command -v pnpm &>/dev/null && [[ "$(pnpm --version 2>/dev/null)" == "$wanted" ]]; then
-        ok "pnpm $wanted found: $(command -v pnpm)"
-        return
+    # What matters is the pnpm that runs in frontend/: a newer global pnpm
+    # switches itself to the version "packageManager" pins there.
+    local in_frontend global
+    if command -v pnpm &>/dev/null; then
+        in_frontend="$(pnpm_version_in_frontend)"
+        global="$(pnpm --version 2>/dev/null)"
+        if [[ "$in_frontend" == "$wanted" ]]; then
+            if [[ "$global" == "$wanted" ]]; then
+                ok "pnpm $wanted found: $(command -v pnpm)"
+            else
+                ok "pnpm $wanted in frontend/ (your global pnpm $global switches to it)"
+            fi
+            return
+        fi
     fi
     if command -v pnpm &>/dev/null; then
-        warn "pnpm $(pnpm --version) found; frontend/package.json pins $wanted"
+        missing "pnpm ${in_frontend:-$global} runs in frontend/; frontend/package.json pins $wanted"
     else
-        warn "pnpm not found"
+        missing "pnpm not found"
     fi
     if $CHECK_ONLY; then return; fi
 
@@ -346,7 +370,7 @@ step_pnpm() {
     hash -r
     (cd "$REPO_ROOT/frontend" && run corepack install >/dev/null)
 
-    if command -v pnpm &>/dev/null && [[ "$(cd "$REPO_ROOT/frontend" && pnpm --version)" == "$wanted" ]]; then
+    if command -v pnpm &>/dev/null && [[ "$(pnpm_version_in_frontend)" == "$wanted" ]]; then
         ok "pnpm $wanted ready"
     else
         fail_step "pnpm setup through corepack failed; try: npm install --global pnpm@$wanted"
@@ -359,12 +383,12 @@ step_deps() {
 
     ensure_local_bin_on_path
     if ! command -v uv &>/dev/null; then
-        if $CHECK_ONLY; then warn "uv not installed; can't check the backend"; else fail_step "uv not found; run the 'uv' step first"; fi
+        if $CHECK_ONLY; then missing "uv not installed; can't check the backend"; else fail_step "uv not found; run the 'uv' step first"; fi
     elif $CHECK_ONLY; then
         if (cd "$REPO_ROOT/backend" && uv sync --locked --check &>/dev/null); then
             ok "backend dependencies match uv.lock"
         else
-            warn "backend dependencies are missing or don't match uv.lock"
+            missing "backend dependencies are missing or don't match uv.lock"
         fi
     else
         (cd "$REPO_ROOT/backend" && run uv sync --locked)
@@ -372,18 +396,58 @@ step_deps() {
     fi
 
     if ! ensure_node_on_path || ! command -v pnpm &>/dev/null; then
-        if $CHECK_ONLY; then warn "Node or pnpm not installed; can't check the frontend"; else fail_step "Node or pnpm not found; run the 'node' and 'pnpm' steps first"; fi
+        if $CHECK_ONLY; then missing "Node or pnpm not installed; can't check the frontend"; else fail_step "Node or pnpm not found; run the 'node' and 'pnpm' steps first"; fi
     elif $CHECK_ONLY; then
         if [[ -f "$REPO_ROOT/frontend/node_modules/.modules.yaml" ]]; then
             ok "frontend dependencies installed"
         else
-            warn "frontend dependencies not installed"
+            missing "frontend dependencies not installed"
         fi
     else
         # Without a TTY, pnpm aborts instead of asking to rebuild node_modules
         # (e.g. after the pnpm store moved); just rebuild it.
         (cd "$REPO_ROOT/frontend" && run pnpm install --frozen-lockfile --config.confirmModulesPurge=false)
         ok "frontend dependencies installed"
+    fi
+}
+
+# ---------------------------------------------------------------------------
+# Only Chromium: the end-to-end tests run on one project, the Moto G4, which is
+# Chromium (and the real-conditions profile uses Chromium's DevTools
+# Protocol). Firefox and WebKit aren't used.
+#
+# Every Playwright version pins its own browser build, downloaded once into
+# Playwright's cache (~/Library/Caches/ms-playwright on macOS, ~/.cache/
+# ms-playwright on Linux), not into the repo. Builds other projects downloaded
+# don't count: after a Playwright upgrade this step downloads the new one.
+playwright_browsers_missing() {
+    (cd "$REPO_ROOT/frontend" && pnpm exec playwright install --dry-run chromium 2>/dev/null) \
+        | sed -n 's/^ *Install location: *//p' \
+        | while read -r dir; do [[ -d "$dir" ]] || echo "$dir"; done
+}
+
+step_browsers() {
+    step_header "Playwright's Chromium (end-to-end tests; Firefox and WebKit aren't used)"
+
+    if ! ensure_node_on_path || ! command -v pnpm &>/dev/null \
+        || [[ ! -x "$REPO_ROOT/frontend/node_modules/.bin/playwright" ]]; then
+        if $CHECK_ONLY; then missing "frontend dependencies not installed; can't check the browsers"; else fail_step "frontend dependencies not installed; run the 'deps' step first"; fi
+        return
+    fi
+
+    local missing
+    missing="$(playwright_browsers_missing)"
+    if [[ -z "$missing" ]]; then
+        ok "Chromium for Playwright installed"
+    elif $CHECK_ONLY; then
+        missing "Chromium for this Playwright version not installed (Playwright $(cd "$REPO_ROOT/frontend" && pnpm exec playwright --version 2>/dev/null | awk '{print $2}'))"
+    else
+        (cd "$REPO_ROOT/frontend" && run pnpm test:e2e:install)
+        if [[ -z "$(playwright_browsers_missing)" ]]; then
+            ok "Chromium for Playwright installed"
+        else
+            fail_step "Playwright's browser download failed; run \`cd frontend && pnpm test:e2e:install\` to see why"
+        fi
     fi
 }
 
@@ -413,7 +477,7 @@ step_services() {
     step_header "PostgreSQL and Redis (Docker Compose) and migrations"
 
     if ! docker info &>/dev/null; then
-        if $CHECK_ONLY; then warn "Docker isn't running; can't check the services"; else fail_step "Docker isn't running; see the 'docker' step"; fi
+        if $CHECK_ONLY; then missing "Docker isn't running; can't check the services"; else fail_step "Docker isn't running; see the 'docker' step"; fi
         return
     fi
 
@@ -423,7 +487,7 @@ step_services() {
             ok "$svc running"
         else
             all_running=false
-            warn "$svc not running"
+            missing "$svc not running"
         fi
     done
 
@@ -467,14 +531,19 @@ if [[ ${#FAILED_STEPS[@]} -gt 0 ]]; then
 fi
 
 if $CHECK_ONLY; then
-    echo "Check complete. Re-run without --check to install anything missing above."
-    echo "Tip: narrow it down with --step <name>; see --list."
+    if [[ ${#MISSING_STEPS[@]} -gt 0 ]]; then
+        local_steps="$(IFS=,; echo "${MISSING_STEPS[*]}")"
+        warn "Missing: ${MISSING_STEPS[*]}. To fix it: ./scripts/setup.sh --step $local_steps"
+        exit 1
+    fi
+    ok "Everything is set up."
 else
     ok "Step(s) complete: ${STEPS_TO_RUN[*]}"
     if [[ "${STEPS_TO_RUN[*]}" == "${ALL_STEPS[*]}" ]]; then
         echo "Next steps:"
         echo "  open a new terminal (or source your shell's rc file) if anything was installed"
         echo "  make dev                     # backend on :8000, frontend on :4321"
+        echo "  make test                    # backend, component and end-to-end tests"
         echo "  open http://localhost:8000/health"
     fi
 fi

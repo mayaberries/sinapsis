@@ -28,7 +28,7 @@ make dev             # runs the backend and the frontend with reload; Ctrl+C sto
 
 If the script installed anything, open a new terminal before `make dev`.
 
-`./scripts/setup.sh --check` only reports what's missing (`make doctor` does the same), and `--step <name>` runs a single step (`--list` names them). It never runs `sudo`: what needs it is reported with the command to run yourself.
+`./scripts/setup.sh --check` only reports what's missing (`make doctor` does the same), and exits with an error naming the steps to run if anything is, and `--step <name>` runs a single step (`--list` names them). It never runs `sudo`: what needs it is reported with the command to run yourself.
 
 |Step|Checks|Installs if missing|
 |---|---|---|
@@ -39,6 +39,7 @@ If the script installed anything, open a new terminal before `make dev`.
 |`node`|Node 22.12 or later (`.nvmrc`)|nvm, if needed, and that Node through it|
 |`pnpm`|The pnpm pinned in `frontend/package.json`|That pnpm, through Corepack|
 |`deps`|`backend/.venv` and `frontend/node_modules` match their lockfiles|Both|
+|`browsers`|The Chromium build this Playwright version pins (Firefox and WebKit aren't used)|It, into Playwright's cache|
 |`services`|PostgreSQL and Redis are running, and the ports are free|Starts them and applies the migrations|
 
 No `.env` is needed: every default matches `docker-compose.yml`. To change a port or a credential, copy `.env.example` to `.env` and edit it.
@@ -57,6 +58,7 @@ Run `make help` for the full list.
 |---|---|
 |`make dev`|Start everything (PostgreSQL and Redis too, if they're stopped)|
 |`make doctor`|Check the prerequisites and services without changing anything|
+|`make test`|Run the backend, component and end-to-end tests (`make test-backend`, `make test-unit` or `make test-e2e` for one suite)|
 |`make backend` / `make frontend`|Run only one side|
 |`make migrate`|Apply new database migrations|
 |`make gen-api`|Regenerate the frontend's typed API client after changing the API|
@@ -68,6 +70,9 @@ Run `make help` for the full list.
 
 - **Port already in use (5432, 6379, 8000 or 4321):** set `POSTGRES_PORT` or `REDIS_PORT` in `.env`, and update `DATABASE_URL` or `REDIS_URL` to match. For the backend or frontend, stop whatever else is running on that port.
 - **`/health` answers 503:** the response names the dependency that's down. Check `docker compose ps`, then `make services-up`. The backend reconnects on its own, so there's no need to restart it.
+- **End-to-end tests fail with `Executable doesn't exist at …/ms-playwright/chromium_headless_shell-NNNN`:** Playwright's browser for this Playwright version isn't downloaded. `pnpm test:e2e` (and `make test-e2e`) download it first, as does `./scripts/setup.sh --step browsers`. Each Playwright version pins its own Chromium build, so builds left by other projects don't count. Only Chromium is needed: the tests run on a Moto G4 profile, and Firefox and WebKit aren't used.
+- **`make doctor` exits with an error:** something is missing, and its last line names the setup steps that fix it, e.g. `./scripts/setup.sh --step browsers`.
+- **uv warns that `VIRTUAL_ENV=…/sinapsis/.venv` doesn't match the project environment:** another virtualenv is active (PyCharm creates one at the repo root). uv ignores it and uses `backend/.venv`, so it's harmless. To silence it, run `deactivate`, or point PyCharm's interpreter at `backend/.venv/bin/python`.
 - **A tool is still "not found" after the setup script installed it:** open a new terminal, so your shell reads the PATH changes the script added.
 - **Anything else:** run `make doctor` (or `./scripts/setup.sh --check --verbose`) to see what's off.
 

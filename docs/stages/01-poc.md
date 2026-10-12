@@ -27,7 +27,7 @@ In build order: each story builds on the ones before it.
 | #   | Story                                                                                                  | Issue | Test IDs |
 | --- | ------------------------------------------------------------------------------------------------------ | ----- | -------- |
 | 1   | App boilerplate: FastAPI backend, Astro + Vue frontend and local environment ([PLT](../boards/PLT.md)) | [#1](https://github.com/mayaberries/sinapsis/issues/1) |          |
-| 2   | Test harness (pytest, Vitest, Playwright) and continuous integration ([PLT](../boards/PLT.md))         | [#2](https://github.com/mayaberries/sinapsis/issues/2) |          |
+| 2   | Test harness (pytest, Vitest, Playwright) and continuous integration ([PLT](../boards/PLT.md))         | [#2](https://github.com/mayaberries/sinapsis/issues/2) | PLT-001–PLT-008 |
 | 3   | Practitioner authentication with Xolo ([AUT](../boards/AUT.md))                                        |       |          |
 | 4   | Create workshops and their fixed link ([AGE](../boards/AGE.md))                                        |       |          |
 | 5   | Schedule workshop sessions with Kalens ([AGE](../boards/AGE.md))                                       |       |          |

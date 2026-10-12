@@ -14,7 +14,11 @@
     "astro": "astro",
     "lint": "eslint .",
     "typecheck": "astro check && vue-tsc --noEmit",
-    "gen:api": "openapi-typescript openapi.json -o src/lib/api/schema.d.ts"
+    "gen:api": "openapi-typescript openapi.json -o src/lib/api/schema.d.ts",
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest",
+    "test:e2e": "playwright install chromium && playwright test",
+    "test:e2e:install": "playwright install chromium"
   },
   "dependencies": {
     "@astrojs/node": "^11.1.7",
@@ -29,13 +33,18 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@eslint/js": "^10.0.1",
+    "@pinia/testing": "^2.0.1",
+    "@playwright/test": "^1.64.0",
+    "@vue/test-utils": "^2.5.1",
     "eslint": "^10.12.0",
     "eslint-plugin-astro": "^3.2.1",
     "eslint-plugin-vue": "^10.11.1",
     "globals": "^17.13.0",
+    "happy-dom": "^21.0.1",
     "openapi-typescript": "^7.13.0",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.71.2",
+    "vitest": "^5.0.4",
     "vue-eslint-parser": "^10.4.1",
     "vue-tsc": "^3.3.13"
   }

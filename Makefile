@@ -1,8 +1,8 @@
 .DEFAULT_GOAL := help
-.PHONY: help setup doctor dev services-up services-down services-reset backend frontend migrate gen-api lint format typecheck
+.PHONY: help setup doctor dev test test-sanity test-backend test-unit test-e2e services-up services-down services-reset backend frontend migrate gen-api lint format typecheck
 
 help: ## Show this help
-	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "} {printf "  %-15s %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z0-9_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "} {printf "  %-15s %s\n", $$1, $$2}'
 
 setup: ## Check and install the prerequisites, then dependencies, services and migrations (scripts/setup.sh)
 	./scripts/setup.sh
@@ -46,6 +46,23 @@ format: ## Format the backend with Ruff and fix ESLint issues on the frontend
 	cd backend && uv run ruff format . && uv run ruff check --fix .
 	cd frontend && pnpm lint --fix
 
+test: test-backend test-unit test-e2e ## Run every test suite (one test case in all of them: ID=PLT-006)
+
+test-sanity: services-up ## Only the sanity tests (the platform works), in every suite
+	cd backend && uv run pytest -m sanity
+	cd frontend && pnpm test:unit --tags-filter sanity
+	cd frontend && pnpm test:e2e --grep @sanity
+
+test-backend: services-up ## pytest against PostgreSQL and Redis (one test case: ID=PLT-002)
+	@# With ID, "no test has it" (pytest's exit code 5) isn't a failure: the case may live in another suite.
+	cd backend && uv run pytest $(if $(ID),--test-id $(ID)) $(if $(ID),|| [ $$? -eq 5 ])
+
+test-unit: ## Vitest component and type tests (one test case: ID=PLT-006)
+	cd frontend && pnpm test:unit $(if $(ID),-t $(ID) --passWithNoTests)
+
+test-e2e: ## Playwright on the production build, Moto G4 profile (one test case: ID=PLT-005)
+	cd frontend && pnpm test:e2e $(if $(ID),--grep $(ID) --pass-with-no-tests)
+
 typecheck: ## mypy on the backend, astro check and vue-tsc on the frontend
-	cd backend && uv run mypy app
+	cd backend && uv run mypy app tests
 	cd frontend && pnpm typecheck
