@@ -1,0 +1,45 @@
+# The toolchain every job but the fresh-clone one needs, with caches: uv and
+# Python for the backend, Node and pnpm for the frontend, and both sides'
+# dependencies from their lockfiles. Versions come from the repo (.nvmrc,
+# backend/.python-version, `packageManager` in frontend/package.json).
+name: Set up the toolchain
+description: uv, Python and backend dependencies; Node, pnpm and frontend dependencies.
+
+inputs:
+  backend:
+    description: Set up the backend.
+    default: "true"
+  frontend:
+    description: Set up the frontend.
+    default: "true"
+
+runs:
+  using: composite
+  steps:
+    - if: inputs.backend == 'true'
+      uses: astral-sh/setup-uv@v6
+      with:
+        enable-cache: true
+        cache-dependency-glob: backend/uv.lock
+
+    - if: inputs.backend == 'true'
+      shell: bash
+      working-directory: backend
+      run: uv sync --locked
+
+    - if: inputs.frontend == 'true'
+      uses: pnpm/action-setup@v4
+      with:
+        package_json_file: frontend/package.json
+
+    - if: inputs.frontend == 'true'
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: .nvmrc
+        cache: pnpm
+        cache-dependency-path: frontend/pnpm-lock.yaml
+
+    - if: inputs.frontend == 'true'
+      shell: bash
+      working-directory: frontend
+      run: pnpm install --frozen-lockfile

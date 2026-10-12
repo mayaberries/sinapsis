@@ -4,11 +4,13 @@ Test layout (mirrors `app/`):
     tests/modules/<name>/   one folder per module, e.g. tests/modules/health/
     tests/shared/           tests for app/shared/
     tests/_fixtures/        fixtures, loaded below as plugins
+    tests/_plugins/         pytest hooks and markers, loaded below
     tests/_helpers/         plain functions and fakes tests import
 
-Tests are named by their test ID (`test_plt_002_...`), so `pytest -k plt_002`
-runs one case. Unlike app code, tests may import a module's internals (e.g.
-its repository, to override it).
+Tests are tied to their story's test IDs with `@pytest.mark.test_id("PLT-002")`
+(tests/_plugins/test_ids.py), so `pytest --test-id PLT-002` runs one case.
+Unlike app code, tests may import a module's internals (e.g. to override
+them).
 """
 
 import os
@@ -25,6 +27,7 @@ from fastapi import FastAPI  # noqa: E402
 from httpx import ASGITransport, AsyncClient  # noqa: E402
 
 pytest_plugins = [
+    "tests._plugins.test_ids",
     "tests._fixtures.database",
     "tests._fixtures.overrides",
 ]

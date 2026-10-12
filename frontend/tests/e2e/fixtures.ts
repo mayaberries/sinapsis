@@ -15,7 +15,12 @@ export const REAL_CONDITIONS = {
 
 type Options = { realConditions: boolean };
 
-export const test = base.extend<Options>({
+type Fixtures = {
+  /** URLs of every script the page requests, recorded from before navigation. */
+  scriptRequests: string[];
+};
+
+export const test = base.extend<Options & Fixtures>({
   realConditions: [false, { option: true }],
 
   page: async ({ page, realConditions }, use) => {
@@ -31,6 +36,14 @@ export const test = base.extend<Options>({
       });
     }
     await use(page);
+  },
+
+  scriptRequests: async ({ page }, use) => {
+    const urls: string[] = [];
+    page.on("request", (request) => {
+      if (request.resourceType() === "script") urls.push(request.url());
+    });
+    await use(urls);
   },
 });
 

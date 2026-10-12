@@ -1,0 +1,165 @@
+# Lint, type checks and every test suite: on each pull request, as the check
+# that gates merging, and on each push to main (i.e. every merge), so main
+# itself is always verified.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  # A new push to a pull request cancels its previous run; runs on main finish.
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+# Each job's `name:` is a required check on main's branch protection: rename
+# or add a job and update the protection too (see CLAUDE.md).
+
+jobs:
+  lint:
+    name: Lint, type checks and API client drift (PLT-007)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+
+      - run: make lint
+      - run: make typecheck
+
+      - name: The committed API client matches the backend's schema (PLT-007)
+        run: |
+          make gen-api
+          git diff --exit-code -- frontend/openapi.json frontend/src/lib/api/schema.d.ts \
+            || { echo "::error::The API changed without regenerating the client: run 'make gen-api' and commit the result."; exit 1; }
+
+  backend:
+    name: Backend tests (pytest)
+    runs-on: ubuntu-latest
+    services:
+      # Same images and credentials as docker-compose.yml, so the backend's
+      # defaults work unchanged.
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: sinapsis
+          POSTGRES_PASSWORD: sinapsis
+          POSTGRES_DB: sinapsis
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U sinapsis -d sinapsis"
+          --health-interval 2s --health-timeout 5s --health-retries 15
+      redis:
+        image: redis:7-alpine
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 2s --health-timeout 5s --health-retries 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          frontend: "false"
+
+      - name: pytest
+        working-directory: backend
+        run: uv run pytest -v --junitxml=test-results/pytest.xml
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: pytest-results
+          path: backend/test-results/
+
+  unit:
+    name: Frontend unit and type tests (Vitest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          backend: "false"
+
+      - run: pnpm test:unit
+        working-directory: frontend
+
+  e2e:
+    name: End-to-end tests (Playwright, Moto G4)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          backend: "false"
+
+      - name: Playwright version
+        id: playwright
+        working-directory: frontend
+        run: echo "version=$(pnpm exec playwright --version | awk '{print $2}')" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright's browsers
+        id: browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright.outputs.version }}
+
+      - name: Install Chromium and its system dependencies
+        if: steps.browsers.outputs.cache-hit != 'true'
+        working-directory: frontend
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Install Chromium's system dependencies only (browser cached)
+        if: steps.browsers.outputs.cache-hit == 'true'
+        working-directory: frontend
+        run: pnpm exec playwright install-deps chromium
+
+      - run: pnpm test:e2e
+        working-directory: frontend
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ failure() }}
+        with:
+          name: playwright-report
+          path: frontend/playwright-report/
+
+  fresh-clone:
+    name: "PLT-001: setup from a fresh clone starts everything"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Exactly what the README tells a developer to run, on a runner with
+      # none of our tools set up: the script has to install uv, Python, pnpm
+      # and the browsers itself.
+      - name: Run the documented setup command
+        run: ./scripts/setup.sh
+
+      - name: Start the backend and the frontend
+        run: |
+          # What "open a new terminal" does after the setup script: pick up
+          # the PATH changes it made.
+          export PATH="$HOME/.local/bin:$PATH"
+          if [ -s "$HOME/.nvm/nvm.sh" ]; then . "$HOME/.nvm/nvm.sh"; nvm use >/dev/null; fi
+          echo "$PATH" > "$RUNNER_TEMP/path"
+          nohup make dev > "$RUNNER_TEMP/dev.log" 2>&1 &
+
+      - name: Wait until both answer
+        run: |
+          for _ in $(seq 1 90); do
+            if curl -fsS http://localhost:8000/health && curl -fsS -o /dev/null http://localhost:4321/; then
+              echo; echo "Backend and frontend are up."; exit 0
+            fi
+            sleep 2
+          done
+          echo "::error::The backend or the frontend didn't come up within 3 minutes."
+          cat "$RUNNER_TEMP/dev.log"
+          exit 1
+
+      - name: Everything reports ready
+        run: |
+          export PATH="$(cat "$RUNNER_TEMP/path")"
+          ./scripts/setup.sh --check

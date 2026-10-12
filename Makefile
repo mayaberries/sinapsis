@@ -46,16 +46,17 @@ format: ## Format the backend with Ruff and fix ESLint issues on the frontend
 	cd backend && uv run ruff format . && uv run ruff check --fix .
 	cd frontend && pnpm lint --fix
 
-test: test-backend test-unit test-e2e ## Run every test suite
+test: test-backend test-unit test-e2e ## Run every test suite (one test case in all of them: ID=PLT-006)
 
-test-backend: services-up ## pytest against PostgreSQL and Redis (one case: make test-backend K=plt_002)
-	cd backend && uv run pytest $(if $(K),-k $(K))
+test-backend: services-up ## pytest against PostgreSQL and Redis (one test case: ID=PLT-002)
+	@# With ID, "no test has it" (pytest's exit code 5) isn't a failure: the case may live in another suite.
+	cd backend && uv run pytest $(if $(ID),--test-id $(ID)) $(if $(ID),|| [ $$? -eq 5 ])
 
-test-unit: ## Vitest component tests (one case: make test-unit K=PLT-006)
-	cd frontend && pnpm test:unit $(if $(K),-t $(K))
+test-unit: ## Vitest component and type tests (one test case: ID=PLT-006)
+	cd frontend && pnpm test:unit $(if $(ID),-t $(ID) --passWithNoTests)
 
-test-e2e: ## Playwright on the production build, Moto G4 profile (one case: make test-e2e K=PLT-005)
-	cd frontend && pnpm test:e2e $(if $(K),--grep $(K))
+test-e2e: ## Playwright on the production build, Moto G4 profile (one test case: ID=PLT-005)
+	cd frontend && pnpm test:e2e $(if $(ID),--grep $(ID) --pass-with-no-tests)
 
 typecheck: ## mypy on the backend, astro check and vue-tsc on the frontend
 	cd backend && uv run mypy app tests

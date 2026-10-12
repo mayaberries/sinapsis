@@ -25,19 +25,28 @@ The POC depends on two of the user's own libraries: [Kalens](https://github.com/
 
 Needs Docker; the setup script installs the rest. Run `make help` for the full list. Node, pnpm and Python versions are pinned in `.nvmrc`, `frontend/package.json` (`packageManager`) and `backend/.python-version`. Configuration defaults match Docker Compose; copy `.env.example` to `.env` only to change something.
 
-- `./scripts/setup.sh` (or `make setup`): check and install the prerequisites (uv, Python, Node through nvm, pnpm through Corepack), then both sides' dependencies, PostgreSQL and Redis, and migrations. `--check` (`make doctor`) only reports; `--step <name>` runs one step. It's bash 3.2 compatible (macOS's default) and never runs sudo.
+- `./scripts/setup.sh` (or `make setup`): check and install the prerequisites (uv, Python, Node through nvm, pnpm through Corepack), then both sides' dependencies, PostgreSQL and Redis, and migrations. `--check` (`make doctor`) only reports, and exits 1 naming the steps that would fix what's missing; `--step <name>` runs one step. It's bash 3.2 compatible (macOS's default) and never runs sudo.
 - `make dev`: run the backend (http://localhost:8000, `GET /health`) and the frontend (http://localhost:4321) with reload
 - `make lint` / `make format` / `make typecheck`: Ruff and mypy on the backend; ESLint, `astro check` and `vue-tsc` on the frontend
 - `make migrate`: apply the backend's Alembic migrations (`cd backend && uv run alembic revision -m "..."` to add one)
 - `make gen-api`: export the backend's OpenAPI schema to `frontend/openapi.json` and regenerate the typed client (`frontend/src/lib/api/schema.d.ts`). Run it after changing the API.
 
-- `make test`: every suite. One at a time: `make test-backend` (pytest, against `<db>_test`, which the migrations recreate per session; every test's writes are rolled back), `make test-unit` (Vitest + Vue Test Utils) and `make test-e2e` (Playwright on the production build, Moto G4 profile).
-- **One test case:** tests are named by their test ID, so `make test-backend K=plt_002` (pytest `-k`), `make test-unit K=PLT-006` (`-t`) or `make test-e2e K=PLT-005` (`--grep`). Directly: `cd backend && uv run pytest -k plt_002`, `cd frontend && pnpm test:unit -t PLT-006`.
+- `make test`: every suite. One at a time: `make test-backend` (pytest, against `<db>_test`, which the migrations recreate per session; every test's writes are rolled back), `make test-unit` (Vitest + Vue Test Utils, plus type tests) and `make test-e2e` (Playwright on the production build, Moto G4 profile; `pnpm test:e2e` first downloads the Chromium build its Playwright version pins, a no-op once it's there. Only Chromium is used).
+- **One test case:** `ID=PLT-002` on any of them (`make test ID=PLT-006` runs it everywhere). Directly: `cd backend && uv run pytest --test-id PLT-002`, `cd frontend && pnpm test:unit -t PLT-006` or `pnpm test:e2e --grep PLT-005`.
+
+**CI** (`.github/workflows/ci.yml`) runs on every pull request and every push to `main`:
+- lint and type checks, including a check that the committed API client matches the backend (PLT-007)
+- the three suites
+- PLT-001: `./scripts/setup.sh` on a clean runner, then `make dev`, until `/health` and the frontend answer
+
+`.github/actions/setup` sets up the toolchain for the other jobs.
+
+`main` is protected: all five CI jobs must pass before a pull request merges, for admins too, and force pushes and deletion are blocked. The rule matches jobs by their `name:`, so renaming or adding a job means updating the required checks (Settings → Branches, or `gh api -X PUT repos/mayaberries/sinapsis/branches/main/protection`). Otherwise merging waits forever on a check that no longer runs.
 
 **Test layout:**
-- `backend/tests/`: vetted's structure, mirroring `app/`. `tests/modules/<name>/` and `tests/shared/` hold the tests (`test_plt_002_...`). `tests/_fixtures/` holds the fixtures, registered in `conftest.py`: `app`, `client`, `db`, `redis`, and `override_dependency` for faking a dependency. `tests/_helpers/` holds the plain helpers. `conftest.py` sets `TESTING=1` before importing the app, and aborts the session with one message if PostgreSQL or Redis is down.
-- `frontend/tests/unit/` mirrors `src/`. Mount islands with `testingPinia()` from `tests/unit/_helpers/pinia.ts`.
-- `frontend/tests/e2e/` holds the end-to-end tests (`*.spec.ts`), which import `test`/`expect` from `tests/e2e/fixtures.ts`. `test.use({ realConditions: true })` adds the real-conditions profile (4× CPU, slow 3G) through CDP.
+- `backend/tests/`: vetted's structure, mirroring `app/`. `tests/modules/<name>/` and `tests/shared/` hold the tests. Tests that span the app (e.g. `test_kalens.py`) sit at the top. Mark each test with the test case it proves, `@pytest.mark.test_id("PLT-002")`; IDs that aren't `XXX-NNN` stop the run (`tests/_plugins/test_ids.py`). `tests/_fixtures/` holds the fixtures, registered in `conftest.py`: `app`, `client`, `db`, `redis`, and `override_dependency` for faking a dependency. `tests/_helpers/` holds the plain helpers (`infra.py`: unreachable PostgreSQL and Redis clients). `conftest.py` sets `TESTING=1` before importing the app, and aborts the session with one message if PostgreSQL or Redis is down.
+- `frontend/tests/unit/` mirrors `src/`. Mount islands with `testingPinia()` from `tests/unit/_helpers/pinia.ts`. `*.test-d.ts` files are type tests: `vue-tsc` checks them and Vitest never runs them.
+- `frontend/tests/e2e/` holds the end-to-end tests (`*.spec.ts`), which import `test`/`expect` from `tests/e2e/fixtures.ts`. `test.use({ realConditions: true })` adds the real-conditions profile (4× CPU, slow 3G) through CDP, and the `scriptRequests` fixture records the scripts a page loads.
 - Test titles start with the ID: `test("PLT-005: …")`.
 
 ## Architecture
