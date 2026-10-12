@@ -19,7 +19,7 @@ GitHub issues follow `docs/WORKFLOW.md`: every story and task has a milestone (i
 
 The POC depends on two of the user's own libraries: [Kalens](https://github.com/mayaberries/kalens) (scheduling engine, Python/FastAPI/PostgreSQL/Redis; it sets the backend stack and expects the host to provide users and auth) and Xolo (authentication, not created yet; to be extracted from another project). See `docs/stages/01-poc.md`.
 
-`assets/en` and `assets/es` hold the same documents in English and Spanish; when one changes, update its counterpart. The repo is also an Obsidian vault (`.obsidian/` config is tracked, workspace state is not).
+`assets/en` and `assets/es` hold the same documents in English and Spanish; when one changes, update its counterpart. The repo is also an Obsidian vault (`.obsidian/` config is tracked, workspace state is not). The code folders (`backend/`, `frontend/`, `scripts/`) are excluded from it in `.obsidian/app.json` and hidden from its file explorer by the `hide-code-folders` CSS snippet; add any new top-level code folder to both.
 
 ## Commands
 
