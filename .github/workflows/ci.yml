@@ -143,7 +143,14 @@ jobs:
           # What "open a new terminal" does after the setup script: pick up
           # the PATH changes it made.
           export PATH="$HOME/.local/bin:$PATH"
-          if [ -s "$HOME/.nvm/nvm.sh" ]; then . "$HOME/.nvm/nvm.sh"; nvm use >/dev/null; fi
+          # nvm's Node only if the script installed one through it: when the
+          # runner's own Node is recent enough, the script keeps that one (and
+          # the runner image ships nvm with no Node 22 in it).
+          if [ -s "$HOME/.nvm/nvm.sh" ]; then
+            . "$HOME/.nvm/nvm.sh"
+            nvm use >/dev/null 2>&1 || true
+          fi
+          node --version
           echo "$PATH" > "$RUNNER_TEMP/path"
           nohup make dev > "$RUNNER_TEMP/dev.log" 2>&1 &
 
