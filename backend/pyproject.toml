@@ -1,0 +1,76 @@
+[project]
+name = "sinapsis-backend"
+version = "0.1.0"
+description = "Sinapsis API: FastAPI on PostgreSQL and Redis."
+requires-python = ">=3.13"
+# FastAPI, Pydantic, databases, SQLAlchemy and Alembic are pinned to the exact
+# versions Kalens pins, so installing it never moves them underneath us.
+dependencies = [
+    "fastapi==0.141.1",
+    "pydantic==2.13.4",
+    "databases[asyncpg]==0.9.0",
+    "SQLAlchemy==2.0.52",
+    "alembic==1.19.1",
+    "asyncpg==0.31.0",
+    "psycopg2-binary==2.9.12",
+    "pydantic-settings>=2.6",
+    "redis>=5.2",
+    "uvicorn[standard]>=0.32",
+    "kalens",
+]
+
+[dependency-groups]
+dev = [
+    "import-linter>=2.15",
+    "mypy>=1.13",
+    "ruff>=0.8",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+kalens = { git = "https://github.com/mayaberries/kalens.git", tag = "v0.1.0-alpha.2" }
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "ASYNC"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+plugins = ["pydantic.mypy"]
+exclude = ["app/migrations/versions/"]
+
+[[tool.mypy.overrides]]
+module = ["databases.*", "kalens.*"]
+ignore_missing_imports = true
+
+# Module boundaries, checked by `lint-imports` (part of `make lint`).
+# See app/modules/__init__.py for the rules in words.
+[tool.importlinter]
+root_package = "app"
+
+[[tool.importlinter.contracts]]
+name = "Layers inside each module: routes → dependencies → service → repository → schemas"
+type = "layers"
+containers = ["app.modules.*"]
+layers = ["(routes)", "(dependencies)", "(service)", "(repository)", "(schemas)"]
+
+[[tool.importlinter.contracts]]
+name = "Modules only use each other through their public API (the package's __init__)"
+type = "forbidden"
+source_modules = ["app.modules.*"]
+forbidden_modules = ["app.modules.*.*"]
+# Importing a module's package runs its __init__, which imports its routes;
+# that indirect path is the public API working as intended.
+allow_indirect_imports = true
+
+[[tool.importlinter.contracts]]
+name = "Shared code doesn't depend on any module"
+type = "forbidden"
+source_modules = ["app.shared"]
+forbidden_modules = ["app.modules"]

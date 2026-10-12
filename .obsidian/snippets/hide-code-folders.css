@@ -1,0 +1,11 @@
+/*
+ * Hides the app's code folders from the file explorer. They're also in
+ * Settings → Files and links → Excluded files (app.json, `userIgnoreFilters`),
+ * which keeps them out of search, the graph and the quick switcher but still
+ * shows them, dimmed, in the explorer.
+ */
+.nav-folder:has(> .nav-folder-title[data-path="backend"]),
+.nav-folder:has(> .nav-folder-title[data-path="frontend"]),
+.nav-folder:has(> .nav-folder-title[data-path="scripts"]) {
+  display: none;
+}

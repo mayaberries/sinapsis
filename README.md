@@ -15,6 +15,62 @@
 |🗂️ [Boards](docs/boards/README.md)|Stories and tickets grouped by domain across stages|
 |📅 [Kalens](https://github.com/mayaberries/kalens)|The scheduling engine the backend is built on|
 
+## 🚀 Getting started
+
+### First run
+
+```bash
+git clone https://github.com/mayaberries/sinapsis.git
+cd sinapsis
+./scripts/setup.sh   # checks and installs the prerequisites, dependencies and services; safe to re-run
+make dev             # runs the backend and the frontend with reload; Ctrl+C stops both
+```
+
+If the script installed anything, open a new terminal before `make dev`.
+
+`./scripts/setup.sh --check` only reports what's missing (`make doctor` does the same), and `--step <name>` runs a single step (`--list` names them). It never runs `sudo`: what needs it is reported with the command to run yourself.
+
+|Step|Checks|Installs if missing|
+|---|---|---|
+|`docker`|Docker, the Compose plugin and a running daemon|Nothing; prints how to install or start it|
+|`make`|make|Nothing; prints how to install it|
+|`uv`|uv|uv, with its official installer, in `~/.local/bin`|
+|`python`|The Python in `backend/.python-version`|That Python, through uv|
+|`node`|Node 22.12 or later (`.nvmrc`)|nvm, if needed, and that Node through it|
+|`pnpm`|The pnpm pinned in `frontend/package.json`|That pnpm, through Corepack|
+|`deps`|`backend/.venv` and `frontend/node_modules` match their lockfiles|Both|
+|`services`|PostgreSQL and Redis are running, and the ports are free|Starts them and applies the migrations|
+
+No `.env` is needed: every default matches `docker-compose.yml`. To change a port or a credential, copy `.env.example` to `.env` and edit it.
+
+Check that it's working:
+
+- Backend health: http://localhost:8000/health should answer `{"status":"ok","checks":{"postgres":"ok","redis":"ok"}}`
+- API docs: http://localhost:8000/docs
+- Frontend: http://localhost:4321, and the session room placeholder at http://localhost:4321/session/demo
+
+### Everyday commands
+
+Run `make help` for the full list.
+
+|Command|What it does|
+|---|---|
+|`make dev`|Start everything (PostgreSQL and Redis too, if they're stopped)|
+|`make doctor`|Check the prerequisites and services without changing anything|
+|`make backend` / `make frontend`|Run only one side|
+|`make migrate`|Apply new database migrations|
+|`make gen-api`|Regenerate the frontend's typed API client after changing the API|
+|`make lint` / `make format` / `make typecheck`|Ruff and mypy on the backend; ESLint, `astro check` and `vue-tsc` on the frontend|
+|`make services-down`|Stop PostgreSQL and Redis, keeping their data|
+|`make services-reset`|Delete PostgreSQL and Redis and their data; run `make setup` afterwards for a clean database|
+
+### Troubleshooting
+
+- **Port already in use (5432, 6379, 8000 or 4321):** set `POSTGRES_PORT` or `REDIS_PORT` in `.env`, and update `DATABASE_URL` or `REDIS_URL` to match. For the backend or frontend, stop whatever else is running on that port.
+- **`/health` answers 503:** the response names the dependency that's down. Check `docker compose ps`, then `make services-up`. The backend reconnects on its own, so there's no need to restart it.
+- **A tool is still "not found" after the setup script installed it:** open a new terminal, so your shell reads the PATH changes the script added.
+- **Anything else:** run `make doctor` (or `./scripts/setup.sh --check --verbose`) to see what's off.
+
 ## 😣 Pain points
 
 From the [research](assets/en/RESEARCH.md):

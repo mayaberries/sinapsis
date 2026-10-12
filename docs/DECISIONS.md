@@ -19,6 +19,41 @@ They apply to every stage of the roadmap.
 
 Newest first. Each one says when it was made, what was decided, why, and what it implies.
 
+### App structure: backend modules, data access and the PWA
+
+*POC · 2026-10-12*
+
+**Decision**
+
+- **Backend structure: modules first, layers inside.**
+  - Each domain (bounded context, not a table) is a package in `app/modules/`. Its layers are files, in one direction: routes → dependencies → service → repository → schemas.
+  - Services hold the business rules and raise domain errors, which are mapped to HTTP status codes in one place. Repositories only run SQL.
+  - Modules only use each other through their package's public API (`__init__.py`).
+  - `app/shared/` holds only domain-agnostic code (config, database, HTTP, errors) and never imports a module.
+  - import-linter enforces the three rules in `make lint`.
+- **Data access:** `databases` with raw SQL and Alembic migrations with no ORM models, using the same FastAPI, Pydantic, `databases` and SQLAlchemy versions Kalens pins. The connection pool lives on `app.state._db`.
+- **Kalens** is installed from its public repo over HTTPS, pinned to its tag.
+- **Frontend:** Astro with the Node adapter (`output: "server"`). Pinia is installed on every Vue island through Vue's app entrypoint.
+- **PWA:** a hand-written manifest and service worker that only cache fingerprinted static assets and icons, never HTML or the API.
+- **TypeScript** is pinned to `~6.0`.
+
+**Why**
+
+- Vetted keeps its business rules in repositories, which raise HTTP errors. Moving them into services keeps the rules testable without HTTP, and keeps repositories replaceable.
+- Vetted groups code by layer (`routes/`, `repositories/`, `models/`…), so working on one entity means opening a folder per layer, and every new entity adds a file to each. Grouping by module keeps one domain in one folder. The layers stay, and are enforced by a linter instead of by folders.
+- Modules that only use each other's public API don't tangle as the product grows, and one can later be split out (into a library, as Kalens was) cheaply.
+- Kalens builds its repositories from a `databases.Database` it reads off `app.state`, and pins its framework versions. The host has to use the same versions, or installing Kalens would change them.
+- A server adapter is needed because the fixed link and the waiting room are dynamic. Vetted's frontend is a static site built once per clinic, so it isn't reused.
+- `@vite-pwa/astro` doesn't support Astro 6 or later. A small service worker of our own is also easier to keep away from per-request pages and the API.
+- vue-tsc, `astro check` and typescript-eslint don't support TypeScript 7 yet.
+
+**Implies**
+
+- Pages without islands still ship one inline script, the service worker registration. "No client JavaScript" means no island or framework bundles.
+- A new domain is a new module. A module only grows sub-packages inside itself, when it needs them.
+- A query spanning several modules' tables (a report) gets a read-only module of its own.
+- Raise the TypeScript pin, and reconsider a PWA plugin, once the tooling catches up.
+
 ### Repo layout, tooling and the real-conditions profile
 
 *POC · 2026-10-09*
