@@ -1,6 +1,6 @@
 from enum import StrEnum
 
-from app.models.core import CoreModel
+from app.shared.schemas import CoreModel
 
 
 class CheckStatus(StrEnum):

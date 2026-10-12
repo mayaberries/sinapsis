@@ -3,9 +3,9 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from app.core.config import get_settings
-from app.db.database import create_database, disconnect, try_connect
-from app.db.redis import create_redis
+from app.shared.config import get_settings
+from app.shared.db.database import create_database, disconnect, try_connect
+from app.shared.db.redis import create_redis
 
 
 @asynccontextmanager

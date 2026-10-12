@@ -2,10 +2,9 @@ from typing import Annotated
 
 from fastapi import Depends
 
-from app.api.dependencies.database import get_repository
-from app.api.dependencies.redis import RedisDep
-from app.db.repositories.health import HealthRepository
-from app.services.health import HealthService
+from app.modules.health.repository import HealthRepository
+from app.modules.health.service import HealthService
+from app.shared.db.dependencies import RedisDep, get_repository
 
 
 def get_health_service(

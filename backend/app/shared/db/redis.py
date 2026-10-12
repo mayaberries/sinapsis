@@ -1,6 +1,6 @@
 from redis.asyncio import Redis
 
-from app.core.config import Settings
+from app.shared.config import Settings
 
 
 def create_redis(settings: Settings) -> Redis:

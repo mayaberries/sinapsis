@@ -1,10 +1,16 @@
+"""
+FastAPI dependencies for the shared clients the lifespan opens. Modules build
+their own repository and service dependencies on top of these.
+"""
+
 from collections.abc import Callable
 from typing import Annotated
 
 from databases import Database
 from fastapi import Depends, Request
+from redis.asyncio import Redis
 
-from app.db.repositories.base import BaseRepository
+from app.shared.db.repository import BaseRepository
 
 
 def get_database(request: Request) -> Database:
@@ -20,3 +26,11 @@ def get_repository[RepoT: BaseRepository](repo_type: type[RepoT]) -> Callable[[D
         return repo_type(db)
 
     return get_repo
+
+
+def get_redis(request: Request) -> Redis:
+    redis: Redis = request.app.state.redis
+    return redis
+
+
+RedisDep = Annotated[Redis, Depends(get_redis)]

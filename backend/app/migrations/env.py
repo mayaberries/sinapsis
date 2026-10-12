@@ -12,7 +12,7 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import create_engine, engine_from_config, pool, text
 
-from app.core.config import get_settings
+from app.shared.config import get_settings
 
 config = context.config
 if config.config_file_name is not None:

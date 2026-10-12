@@ -1,5 +1,5 @@
-from app.db.database import try_connect
-from app.db.repositories.base import BaseRepository
+from app.shared.db.database import try_connect
+from app.shared.db.repository import BaseRepository
 
 PING_QUERY = "SELECT 1;"
 

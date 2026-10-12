@@ -49,7 +49,7 @@ The full reasoning for each one is in [decisions](../DECISIONS.md).
 - **Tests:** `pytest` on the backend, Vitest for components, Playwright end to end with Android emulation and network throttling.
 - **Backend:** Python, FastAPI, PostgreSQL and Redis, set by Kalens.
 - **Repo and tooling:** `backend/` and `frontend/` in this repo, Docker Compose for PostgreSQL and Redis, uv and pnpm; Ruff and mypy, ESLint and vue-tsc; GitHub Actions for CI.
-- **App structure:** backend layers (routes → dependencies → services → repositories) with `databases` and raw SQL as Kalens requires; Astro on the Node adapter; a hand-written PWA manifest and service worker.
+- **App structure:** backend organized by module, with layers inside each one (routes → dependencies → service → repository → schemas) and the boundaries checked by import-linter, using `databases` and raw SQL as Kalens requires; Astro on the Node adapter; a hand-written PWA manifest and service worker.
 - **Real conditions:** the end-to-end reference profile is Playwright's Moto G4 with 4× CPU throttling and a slow 3G-like connection.
 
 ## ❓ Open decisions

@@ -21,6 +21,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "import-linter>=2.15",
     "mypy>=1.13",
     "ruff>=0.8",
 ]
@@ -42,8 +43,34 @@ select = ["E", "F", "W", "I", "B", "UP", "ASYNC"]
 python_version = "3.13"
 strict = true
 plugins = ["pydantic.mypy"]
-exclude = ["app/db/migrations/versions/"]
+exclude = ["app/migrations/versions/"]
 
 [[tool.mypy.overrides]]
 module = ["databases.*", "kalens.*"]
 ignore_missing_imports = true
+
+# Module boundaries, checked by `lint-imports` (part of `make lint`).
+# See app/modules/__init__.py for the rules in words.
+[tool.importlinter]
+root_package = "app"
+
+[[tool.importlinter.contracts]]
+name = "Layers inside each module: routes → dependencies → service → repository → schemas"
+type = "layers"
+containers = ["app.modules.*"]
+layers = ["(routes)", "(dependencies)", "(service)", "(repository)", "(schemas)"]
+
+[[tool.importlinter.contracts]]
+name = "Modules only use each other through their public API (the package's __init__)"
+type = "forbidden"
+source_modules = ["app.modules.*"]
+forbidden_modules = ["app.modules.*.*"]
+# Importing a module's package runs its __init__, which imports its routes;
+# that indirect path is the public API working as intended.
+allow_indirect_imports = true
+
+[[tool.importlinter.contracts]]
+name = "Shared code doesn't depend on any module"
+type = "forbidden"
+source_modules = ["app.shared"]
+forbidden_modules = ["app.modules"]

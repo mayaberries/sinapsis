@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import api_router, root_router
-from app.core.config import get_settings
-from app.core.errors import register_error_handlers
-from app.core.lifespan import lifespan
+from app.lifespan import lifespan
+from app.modules import health
+from app.shared.config import get_settings
+from app.shared.http.errors import register_error_handlers
 
 
 def create_app() -> FastAPI:
@@ -20,8 +20,9 @@ def create_app() -> FastAPI:
     )
     register_error_handlers(app)
 
-    app.include_router(root_router)
-    app.include_router(api_router, prefix=settings.api_prefix)
+    # Infrastructure modules mount at the root; product modules go under
+    # `settings.api_prefix`.
+    app.include_router(health.router, tags=["health"])
 
     return app
 

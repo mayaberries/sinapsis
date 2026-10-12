@@ -2,7 +2,7 @@ import logging
 
 from databases import Database
 
-from app.core.config import Settings
+from app.shared.config import Settings
 
 logger = logging.getLogger(__name__)
 

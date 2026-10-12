@@ -35,14 +35,24 @@ There is no test suite yet; story #2 adds pytest, Vitest, Playwright and CI. Whe
 
 ## Architecture
 
-**Backend** (`backend/app/`), FastAPI on PostgreSQL through `databases` with raw SQL (the same stack and pinned versions as Kalens, which reads the pool from `app.state._db`). Each request goes through four layers:
+**Backend** (`backend/app/`), FastAPI on PostgreSQL through `databases` with raw SQL (the same stack and pinned versions as Kalens, which reads the pool from `app.state._db`). Organized by module first, layers inside each module:
 
-- `api/routes/`: thin; parse the request, call a service. Infrastructure routes (`/health`) mount at the root, product routes under `/api`.
-- `api/dependencies/`: wiring. `get_database`, `get_redis`, `get_repository(Repo)`, one `get_<x>_service` per service, plus path lookups and permission checks. Expose them as `Annotated` aliases (`DatabaseDep`, `HealthServiceDep`).
-- `services/`: business rules. They raise the domain errors in `core/errors.py` (`NotFoundError`, `PermissionDeniedError`, `ConflictError`), never `HTTPException`; `main.py` maps them to status codes.
-- `db/repositories/`: SQL only, returning models in `models/` or `None`.
+```
+app/
+  main.py, lifespan.py      # wires the modules; opens the DB and Redis clients
+  modules/<name>/           # one per domain (bounded context), not per table
+    __init__.py             # the module's public API: what other code may import
+    routes.py → dependencies.py → service.py → repository.py → schemas.py
+  shared/                   # domain-agnostic only: config, db/, http/, errors, base schemas
+  migrations/               # the app's Alembic chain (Kalens keeps its own)
+```
 
-`core/lifespan.py` creates the database and Redis clients without failing when either is down, so `/health` can report it (503, naming the failing dependency).
+- **Layers are files, in one direction:** routes → dependencies → service → repository → schemas, never backwards. Routes are thin; dependencies do the wiring (one `get_<x>_service` per service, exposed as `Annotated` aliases like `HealthServiceDep`; `get_repository`, `DatabaseDep` and `RedisDep` come from `shared/db/dependencies.py`); services hold the business rules and raise the domain errors in `shared/errors.py`, never `HTTPException` (`shared/http/errors.py` maps them to status codes); repositories run SQL only and return schemas or `None`.
+- **Modules only import each other through their package** (`from app.modules import users`), never another module's `service`, `repository`… Export what others need from `__init__.py`.
+- **`shared/` never imports from `modules/`.** If only some modules need something, it belongs to one of them and is exported.
+- `make lint` enforces these three rules with import-linter (contracts in `backend/pyproject.toml`).
+- Every layer is optional: a module without a database has no `repository.py`. A module that grows splits into sub-packages *inside itself*; don't add top-level folders per layer. A query that spans modules' tables (a report) gets a read-only module of its own instead of one repository reaching into another's tables. A circular import between modules means a misplaced boundary.
+- Infrastructure modules (`health`, `GET /health`) mount at the root, product modules under `/api`. `lifespan.py` creates the database and Redis clients without failing when either is down, so `/health` can report it (503, naming the failing dependency).
 
 **Frontend** (`frontend/`), Astro with the Node adapter: pages render on the server and ship no JavaScript unless they hold an island. Vue islands get Pinia from `src/app.ts`; state shared across islands goes in nanostores (`src/shared/`). The session room is one `client:only="vue"` island (`src/islands/`). The PWA is a hand-written `public/manifest.webmanifest` and `public/sw.js`, which never caches HTML or the API. TypeScript is pinned to `~6.0` until vue-tsc, `astro check` and typescript-eslint support 7.
 

@@ -1,8 +1,8 @@
 from redis.asyncio import Redis
 from redis.exceptions import RedisError
 
-from app.db.repositories.health import HealthRepository
-from app.models.health import CheckStatus, HealthStatus, OverallStatus
+from app.modules.health.repository import HealthRepository
+from app.modules.health.schemas import CheckStatus, HealthStatus, OverallStatus
 
 
 class HealthService:

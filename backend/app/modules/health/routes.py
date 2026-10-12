@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Response, status
 
-from app.api.dependencies.health import HealthServiceDep
-from app.models.health import HealthStatus
+from app.modules.health.dependencies import HealthServiceDep
+from app.modules.health.schemas import HealthStatus
 
 router = APIRouter()
 

@@ -38,8 +38,8 @@ gen-api: ## Regenerate the frontend's typed API client from the backend's OpenAP
 	cd backend && uv run python -m app.scripts.export_openapi > ../frontend/openapi.json
 	cd frontend && pnpm gen:api
 
-lint: ## Ruff on the backend, ESLint on the frontend
-	cd backend && uv run ruff check . && uv run ruff format --check .
+lint: ## Ruff and the module boundaries (import-linter) on the backend, ESLint on the frontend
+	cd backend && uv run ruff check . && uv run ruff format --check . && uv run lint-imports
 	cd frontend && pnpm lint
 
 format: ## Format the backend with Ruff and fix ESLint issues on the frontend
