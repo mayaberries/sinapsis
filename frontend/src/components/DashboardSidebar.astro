@@ -1,0 +1,74 @@
+<aside class="sidebar">
+  <span class="brand">Sinapsis</span>
+  <nav class="side-nav" aria-label="Panel">
+    <a href="#talleres" aria-current="page"
+      ><span aria-hidden="true">🗂</span><span class="nav-text">Mis talleres</span></a
+    >
+    <a href="#materiales"
+      ><span aria-hidden="true">📁</span><span class="nav-text">Materiales</span></a
+    >
+  </nav>
+</aside>
+
+<style>
+  .sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .brand {
+    padding: 0 8px;
+  }
+  .side-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .side-nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: var(--tap-min);
+    padding: 0 12px;
+    border-radius: var(--radius);
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .side-nav a:hover {
+    background: var(--surface-2);
+  }
+  .side-nav a[aria-current="page"] {
+    background: var(--primary-soft);
+    color: var(--primary);
+  }
+
+  @media (max-width: 860px) {
+    .sidebar {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      border-right: 0;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+    .side-nav {
+      flex-direction: row;
+    }
+    /* Icons only, but the text stays for screen readers */
+    .side-nav .nav-text {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+  }
+</style>

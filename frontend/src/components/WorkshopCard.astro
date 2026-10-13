@@ -1,0 +1,137 @@
+---
+import type { Workshop } from "../data/demo";
+
+interface Props {
+  workshop: Workshop;
+  startHref: string;
+}
+
+const { workshop, startHref } = Astro.props;
+const { schedule } = workshop;
+
+const tag =
+  schedule.kind === "recurring"
+    ? `Recurrente · ${schedule.cadence}`
+    : schedule.kind === "one-time"
+      ? "Único"
+      : "Borrador";
+---
+
+<article class="card workshop-card">
+  <div class="workshop-card-top">
+    <span class:list={["tag", { "tag-primary": schedule.kind === "recurring" }]}>{tag}</span>
+  </div>
+  <h3>{workshop.title}</h3>
+
+  {
+    schedule.kind === "recurring" && (
+      <div
+        class="progress"
+        role="img"
+        aria-label={`${schedule.completed} de ${schedule.total} sesiones completadas`}
+      >
+        <span style={`width: ${(schedule.completed / schedule.total) * 100}%`} />
+      </div>
+    )
+  }
+
+  {
+    schedule.kind === "draft" ? (
+      <p class="muted">Aún no tiene fechas. Agrégalas para publicarlo.</p>
+    ) : (
+      <dl class="meta">
+        {schedule.kind === "recurring" ? (
+          <>
+            <dt>Próxima</dt>
+            <dd>{schedule.next}</dd>
+            {schedule.then && (
+              <>
+                <dt>Después</dt>
+                <dd>{schedule.then}</dd>
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <dt>Fecha</dt>
+            <dd>{schedule.date}</dd>
+          </>
+        )}
+        <dt>Participantes</dt>
+        <dd>{workshop.participants}</dd>
+        <dt>Código</dt>
+        <dd>{workshop.code}</dd>
+      </dl>
+    )
+  }
+
+  <div class="card-actions">
+    {
+      workshop.startsToday && schedule.kind === "recurring" && (
+        <a class="btn btn-primary btn-small" href={startHref}>
+          Empezar sesión {schedule.completed + 1}
+        </a>
+      )
+    }
+    {
+      schedule.kind === "draft" ? (
+        <a class="btn btn-secondary btn-small" href="#editar">
+          Seguir editando
+        </a>
+      ) : (
+        <>
+          <a class="btn btn-secondary btn-small" href="#materiales">
+            Materiales ({workshop.materials})
+          </a>
+          <a class="btn btn-secondary btn-small" href="#editar">
+            Editar
+          </a>
+        </>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .workshop-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .workshop-card-top {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 12px;
+    margin: 0;
+  }
+  .meta dt {
+    color: var(--muted);
+  }
+  .meta dd {
+    margin: 0;
+    font-weight: 600;
+  }
+  /* Progress for recurring series: session 4 of 8 */
+  .progress {
+    height: 8px;
+    background: var(--surface-2);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .progress > span {
+    display: block;
+    height: 100%;
+    background: var(--primary);
+  }
+  .card-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+</style>

@@ -1,9 +1,17 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/room.css";
+
 import SessionRoom from "../../islands/SessionRoom.vue";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Role } from "../../stores/room";
+
+// The role comes from the URL for the demo (the dashboard links with
+// ?role=host); later, from the signed-in user. Read on the server, so the
+// page ships no script for it.
+const role: Role = Astro.url.searchParams.get("role") === "host" ? "host" : "attendee";
 ---
 
-<!-- Placeholder for the session room (story 7). -->
+<!-- The session room: one client-only island (see docs/DECISIONS.md). -->
 <BaseLayout title="Sesión · Sinapsis">
-  <SessionRoom client:only="vue" />
+  <SessionRoom client:only="vue" roomRole={role} />
 </BaseLayout>

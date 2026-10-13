@@ -1,0 +1,87 @@
+---
+import { MATERIAL_ICONS, MATERIAL_LABELS, type Material } from "../data/demo";
+
+interface Props {
+  materials: Material[];
+}
+
+const { materials } = Astro.props;
+---
+
+<div class="card">
+  <ul class="material-list">
+    {
+      materials.map((material) => (
+        <li>
+          <span class="file-icon" aria-hidden="true">
+            {MATERIAL_ICONS[material.kind]}
+          </span>
+          <div>
+            <div class="file-name">{material.name}</div>
+            <span class="muted">
+              {MATERIAL_LABELS[material.kind]} · {material.size} ·{" "}
+              {material.usedIn ?? "Sin asignar a un taller"}
+            </span>
+          </div>
+          <div class="file-actions">
+            <button class="btn btn-secondary btn-small" type="button">
+              {material.usedIn ? "Vista previa" : "Asignar"}
+            </button>
+            <button
+              class="btn btn-secondary btn-small"
+              type="button"
+              aria-label={`Más opciones para ${material.name}`}
+            >
+              ⋯
+            </button>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .material-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .material-list li {
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
+  }
+  .material-list li:first-child {
+    border-top: 0;
+  }
+  .file-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: var(--surface-2);
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+  }
+  .file-name {
+    font-weight: 600;
+    word-break: break-word;
+  }
+  .file-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  @media (max-width: 860px) {
+    .material-list li {
+      grid-template-columns: 48px 1fr;
+    }
+    .file-actions {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

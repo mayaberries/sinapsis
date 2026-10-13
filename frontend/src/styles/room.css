@@ -1,0 +1,292 @@
+/*
+ * The session room (src/islands/SessionRoom.vue and src/islands/room/), shared
+ * by participants and facilitators. Imported by the room's page, so it's in
+ * the page's <head> before the island loads.
+ */
+
+.room {
+  min-height: 100vh;
+}
+
+.offline-banner {
+  margin: 0;
+  padding: 8px 16px;
+  background: var(--danger);
+  color: var(--danger-text);
+  text-align: center;
+  font-weight: 600;
+}
+
+/* ---------- Pre-join check ---------- */
+.check {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+.check-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+}
+.preview {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--call-bg);
+  border-radius: var(--radius);
+  display: grid;
+  place-items: center;
+  color: var(--control-text);
+}
+.preview-label {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  text-align: center;
+}
+.preview-controls {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+.check-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.check-side .btn {
+  width: 100%;
+}
+.device-row .input {
+  width: 100%;
+}
+
+/* ---------- Live session ---------- */
+.session {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100vh;
+  background: var(--call-bg);
+  color: var(--control-text);
+}
+.session-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  padding: 12px 24px;
+}
+.session-header h1 {
+  font-size: 22px;
+  margin: 0;
+}
+.session-header .muted {
+  color: var(--call-muted);
+}
+.session-body {
+  flex: 1;
+  display: flex;
+  gap: 16px;
+  min-height: 0;
+  padding: 0 16px;
+}
+
+/* Stage = facilitator camera or presented material. Strip = everyone else. */
+.stage-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.stage {
+  flex: 1;
+  min-height: 0;
+  background: var(--tile-bg);
+  border-radius: var(--radius);
+  display: grid;
+  place-items: center;
+  position: relative;
+  padding: 16px;
+  text-align: center;
+}
+.strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(160px, 1fr);
+  gap: 12px;
+  height: 120px;
+  overflow-x: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tile {
+  position: relative;
+  background: var(--tile-bg);
+  border-radius: var(--radius);
+  display: grid;
+  place-items: center;
+  min-height: 0;
+}
+.tile.speaking {
+  outline: 3px solid var(--speaking);
+}
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #5f6b7a;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 22px;
+}
+.name-tag {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  font-size: 15px;
+}
+
+/* ---------- Side panels (chat / people / materials) ---------- */
+.side-panel {
+  display: flex;
+  width: 360px;
+  flex-direction: column;
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.panel-header h2 {
+  margin: 0;
+}
+.panel-body {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+}
+.panel-footer {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid var(--border);
+}
+.panel-footer .input {
+  flex: 1;
+  min-width: 0;
+}
+.panel-section-title {
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin: 16px 0 8px;
+}
+.panel-section-title:first-child {
+  margin-top: 0;
+}
+
+/* ---------- Control bar: big buttons, always labeled ---------- */
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+  flex-wrap: wrap;
+}
+.control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  color: var(--control-text);
+  cursor: pointer;
+  background: none;
+  border: 0;
+  font-family: inherit;
+  padding: 0;
+  text-decoration: none;
+}
+.control-btn {
+  width: var(--control-size);
+  height: var(--control-size);
+  border-radius: 50%;
+  background: var(--control-bg);
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+}
+.control:hover .control-btn {
+  filter: brightness(1.15);
+}
+.control.off .control-btn {
+  background: var(--danger);
+}
+.control.active .control-btn {
+  background: var(--primary);
+}
+.control.leave .control-btn {
+  background: var(--danger);
+  width: calc(var(--control-size) * 1.5);
+  border-radius: 999px;
+}
+.controls-divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--control-bg);
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 760px) {
+  .check-layout {
+    grid-template-columns: 1fr;
+  }
+  /* Taller on phones, so the label and the controls don't crowd it */
+  .preview {
+    aspect-ratio: 4 / 3;
+  }
+  .side-panel {
+    position: fixed;
+    inset: 0;
+    width: auto;
+    border-radius: 0;
+    z-index: 10;
+  }
+  .strip {
+    height: 96px;
+    grid-auto-columns: 130px;
+  }
+  .controls {
+    gap: 12px;
+  }
+  .controls-divider {
+    display: none;
+  }
+}

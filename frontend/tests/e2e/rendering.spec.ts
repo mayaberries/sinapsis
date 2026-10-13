@@ -6,7 +6,7 @@ test.describe("a page with no island", { tag: "@sanity" }, () => {
     const response = await request.get("/");
 
     expect(response.ok()).toBe(true);
-    expect(await response.text()).toMatch(/<h1[^>]*>\s*Sinapsis\s*<\/h1>/);
+    expect(await response.text()).toMatch(/<h1[^>]*>\s*Únete a un taller\s*<\/h1>/);
   });
 
   test.describe("with JavaScript disabled", () => {
@@ -15,7 +15,7 @@ test.describe("a page with no island", { tag: "@sanity" }, () => {
     test("PLT-005: still shows its content", async ({ page }) => {
       await page.goto("/");
 
-      await expect(page.getByRole("heading", { level: 1, name: "Sinapsis" })).toBeVisible();
+      await expect(page.getByRole("heading", { level: 1, name: "Únete a un taller" })).toBeVisible();
     });
   });
 

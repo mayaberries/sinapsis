@@ -1,0 +1,44 @@
+---
+import type { UpNext } from "../data/demo";
+
+interface Props {
+  next: UpNext;
+  startHref: string;
+}
+
+const { next, startHref } = Astro.props;
+---
+
+<section class="card up-next" aria-labelledby="next-title">
+  <div>
+    <span class="tag tag-primary">Sigue · {next.startsIn}</span>
+    <h2 id="next-title" class="next-title">{next.title} — {next.session}</h2>
+    <p class="muted">
+      {next.when} · {next.participants} participantes registrados · Código {next.code}
+    </p>
+    <p class="muted">{next.materials} materiales listos para esta sesión</p>
+  </div>
+  <div class="up-next-actions">
+    <a class="btn btn-secondary" href="#materiales">Revisar materiales</a>
+    <a class="btn btn-primary" href={startHref}>Empezar la sesión</a>
+  </div>
+</section>
+
+<style>
+  .up-next {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    border-left: 6px solid var(--primary);
+  }
+  .next-title {
+    margin-top: 8px;
+  }
+  .up-next-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+</style>

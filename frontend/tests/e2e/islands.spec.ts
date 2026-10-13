@@ -10,9 +10,9 @@ test.describe("the session room island", { tag: "@sanity" }, () => {
     await page.goto("/session/demo");
 
     // A working click means the island hydrated and its Pinia store is live.
-    await page.getByRole("button", { name: "Entrar" }).click();
+    await page.getByRole("button", { name: "Unirme al taller" }).click();
 
-    await expect(page.getByText("Estás en la sesión")).toBeVisible();
+    await expect(page.getByRole("region", { name: "Sesión del taller" })).toBeVisible();
   });
 });
 
