@@ -1,0 +1,113 @@
+/*
+ * Global component classes every page uses: buttons, cards, form controls,
+ * tags. Kept as plain classes (not components) so markup stays close to the
+ * prototype and works the same in Astro pages and Vue islands.
+ */
+
+.muted {
+  color: var(--muted);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: var(--tap-min);
+  padding: 0 24px;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--primary);
+  color: var(--primary-text);
+}
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn-danger {
+  background: var(--danger);
+  color: var(--danger-text);
+}
+.btn-small {
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: 16px;
+}
+
+/* ---------- Surfaces ---------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+/* ---------- Forms ---------- */
+.input {
+  /* A <select> is as wide as its longest option: never wider than its box */
+  max-width: 100%;
+  min-height: var(--tap-min);
+  padding: 0 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+.label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* ---------- Tags ---------- */
+.tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  background: var(--surface-2);
+  color: var(--text);
+  vertical-align: middle;
+}
+.tag-live {
+  background: var(--danger);
+  color: var(--danger-text);
+}
+.tag-primary {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+/* ---------- Lists of rows (people, materials) ---------- */
+.row-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.row-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+}
+.row-list li:first-child {
+  border-top: 0;
+}

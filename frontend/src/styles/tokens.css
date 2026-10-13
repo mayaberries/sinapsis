@@ -1,0 +1,40 @@
+/*
+ * Design tokens: restyle everything from here. Ported from the workshop UI
+ * prototype, with its colors mapped to the app's teal and cream (the same as
+ * the manifest and icons).
+ */
+:root {
+  --bg: #f4efe6;
+  --surface: #ffffff;
+  --surface-2: #ece5d8;
+  --text: #1f2a2b;
+  --muted: #59646a;
+  --border: #d6cdbd;
+  --primary: #2f5d62;
+  --primary-text: #ffffff;
+  --primary-soft: #e0ecec;
+  --danger: #b3261e;
+  --danger-text: #ffffff;
+  --success: #2e7d32;
+  --focus: #b45309;
+
+  /* The session room's dark surfaces */
+  --call-bg: #172427;
+  --tile-bg: #243437;
+  --control-bg: #33464a;
+  --control-text: #ffffff;
+  --call-muted: #b9c6c7;
+  --speaking: #4caf50;
+
+  --radius: 12px;
+  --control-size: 64px; /* large, easy-to-hit call controls */
+  --tap-min: 52px; /* minimum height for any button or input */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --text-base: 18px; /* readable default size */
+}
+
+@media (max-width: 760px) {
+  :root {
+    --control-size: 56px;
+  }
+}

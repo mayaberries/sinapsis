@@ -1,0 +1,68 @@
+---
+/**
+ * The workshops a participant is registered in, with a button to join each.
+ * Not rendered yet: it needs participant lists, which facilitators will be
+ * able to create (without accounts) later.
+ */
+import type { JoinableWorkshop } from "../data/demo";
+
+interface Props {
+  workshops: JoinableWorkshop[];
+  joinHref: string;
+}
+
+const { workshops, joinHref } = Astro.props;
+---
+
+<section class="card" aria-labelledby="list-title">
+  <h2 id="list-title">Tus talleres</h2>
+  <ul class="workshop-list">
+    {
+      workshops.map((workshop) => (
+        <li>
+          <div>
+            <span class="workshop-title">{workshop.title}</span>
+            {workshop.live && <span class="tag tag-live">EN VIVO</span>}
+            <br />
+            <span class="muted">
+              {workshop.facilitator} · {workshop.when}
+            </span>
+          </div>
+          <a class:list={["btn", workshop.live ? "btn-primary" : "btn-secondary"]} href={joinHref}>
+            Unirme
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .workshop-list {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+  }
+  .workshop-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+  }
+  .workshop-list li:first-child {
+    border-top: 0;
+  }
+  .workshop-title {
+    font-weight: 600;
+    margin-right: 8px;
+  }
+
+  @media (max-width: 760px) {
+    .workshop-list li {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>

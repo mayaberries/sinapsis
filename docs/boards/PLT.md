@@ -21,7 +21,8 @@ Every story and task labeled `board:PLT`, newest first.
 
 |Issue|Type|Stage|Status|Test IDs|
 |---|---|---|---|---|
+|[#7](https://github.com/mayaberries/sinapsis/issues/7)|task|POC|open|PLT-009|
 |[#4](https://github.com/mayaberries/sinapsis/issues/4)|task|POC|open||
 |[#3](https://github.com/mayaberries/sinapsis/issues/3)|task|POC|open||
 |[#2](https://github.com/mayaberries/sinapsis/issues/2)|story|POC|open|PLT-001–PLT-008|
-|[#1](https://github.com/mayaberries/sinapsis/issues/1)|story|POC|open||
+|[#1](https://github.com/mayaberries/sinapsis/issues/1)|story|POC|open|PLT-009|

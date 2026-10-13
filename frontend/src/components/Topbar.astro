@@ -1,0 +1,22 @@
+---
+interface Props {
+  greeting?: string;
+}
+
+const { greeting } = Astro.props;
+---
+
+<header class="topbar">
+  <span class="brand">Sinapsis</span>
+  {greeting && <span class="muted">{greeting}</span>}
+</header>
+
+<style>
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 24px;
+  }
+</style>

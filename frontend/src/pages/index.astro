@@ -1,10 +1,76 @@
 ---
+import Topbar from "../components/Topbar.astro";
+import { participant } from "../data/demo";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Sinapsis">
-  <main>
-    <h1>Sinapsis</h1>
-    <p>Consultas y talleres a distancia.</p>
-  </main>
+<!-- The participant's join page. No island: the form is a plain GET to the room. -->
+<BaseLayout title="Únete a un taller · Sinapsis">
+  <div class="join-page">
+    <Topbar greeting={`Hola, ${participant.name}`} />
+
+    <main class="join-main">
+      <section class="card" aria-labelledby="join-title">
+        <h1 id="join-title">Únete a un taller</h1>
+        <form class="code-form" action="/session/demo" method="get">
+          <label class="label" for="code">Escribe el código de tu taller</label>
+          <input
+            class="input"
+            id="code"
+            name="code"
+            type="text"
+            placeholder="p. ej. ans-4821"
+            autocomplete="off"
+            autocapitalize="none"
+          />
+          <button class="btn btn-primary" type="submit">Unirme</button>
+        </form>
+        <p class="muted hint">O abre el enlace que te envió quien facilita el taller.</p>
+      </section>
+    </main>
+
+    <p class="muted demo-switch">
+      Prototipo: <a href="/panel">ver el panel de quien facilita</a>
+    </p>
+  </div>
 </BaseLayout>
+
+<style>
+  .join-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .join-main {
+    flex: 1;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px 16px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .code-form {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .code-form .label {
+    width: 100%;
+    margin: 0;
+  }
+  .code-form .input {
+    flex: 1 1 220px;
+    min-width: 0;
+    letter-spacing: 0.08em;
+  }
+  .hint {
+    margin: 16px 0 0;
+  }
+  .demo-switch {
+    text-align: center;
+    padding: 0 16px 24px;
+  }
+</style>
