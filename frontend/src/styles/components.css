@@ -58,6 +58,8 @@
 
 /* ---------- Forms ---------- */
 .input {
+  /* A <select> is as wide as its longest option: never wider than its box */
+  max-width: 100%;
   min-height: var(--tap-min);
   padding: 0 16px;
   border: 2px solid var(--border);
