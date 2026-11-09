@@ -19,6 +19,36 @@ They apply to every stage of the roadmap.
 
 Newest first. Each one says when it was made, what was decided, why, and what it implies.
 
+### Settings and startup
+
+*POC · 2026-11-08*
+
+**Decision**
+
+- **One `Settings`** (`app/shared/config.py`, pydantic-settings): typed, read from the environment then the repo root's `.env` (resolved from the file's location, not the working directory), cached by `get_settings()`, and read where a value is used, never copied into constants or defaults.
+- **An `environment` setting** (`development | test | production`) replaces `testing`. Development runs with no `.env`, as today. In production, values whose defaults are unsafe (database URL, secrets, CORS origins) must be set, known template secrets and a `*` origin are rejected, and startup fails with one error listing every problem.
+- **Secrets are `SecretStr`.** **CORS origins** stay a setting, never `*` with credentials.
+- **The app starts with PostgreSQL or Redis down**, as `try_connect` already does. `GET /health/live` always answers 200; `GET /health/ready` is today's `/health` (200 or 503 naming each check), and `/health` stays as its alias.
+- **Each external client declares a failure mode** next to its setting: fail-closed (the request gets `503 {"detail": "Service temporarily unavailable."}`) or fail-open (log and continue). The database and auth are fail-closed; rate limiting and caches are fail-open.
+- **The database fails closed through `get_database`**, which reconnects once and otherwise raises `ServiceUnavailableError` (503). Connections dropping mid-request (asyncpg's `PostgresConnectionError` family, `OSError`) map to the same 503 in one handler.
+- **Unreachable services are logged once per state change**, at `warning` going down and `info` coming back.
+- The how-to is the project skill `add-setting`.
+
+**Why**
+
+- Configuration read at import (Vetted's `app/core/config.py`) gets frozen into function and model defaults, so tests and scripts can't change it.
+- Defaults that make a fresh clone run are wrong for production. Refusing them there is what stops a deploy from quietly connecting to whatever local database answers.
+- A process that is up but can't reach its database shouldn't be restarted, only taken out of rotation. One endpoint can't answer both questions.
+- A query on a `databases.Database` that never connected raises a bare `AssertionError`, which can't be caught globally. Checking the connection in the dependency turns it into a 503 at the one place every query passes through.
+- A Redis outage shouldn't stop people booking. A database outage can't be worked around.
+
+**Implies**
+
+- `testing` and `effective_database_url` move behind `environment`. The test harness sets `ENVIRONMENT=test`.
+- `ServiceUnavailableError` joins `app/shared/errors.py`, with its handler in `app/shared/http/errors.py`.
+- Kalens' rate limiter has no failure handling (`strategy.hit()` raises whatever Redis raises), so making it fail-open is a Kalens change, and only matters once this app mounts Kalens' routes.
+
+
 ### App structure: backend modules, data access and the PWA
 
 *POC · 2026-10-12*
