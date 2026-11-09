@@ -1,12 +1,21 @@
 from datetime import UTC, datetime
 
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, ConfigDict, field_validator
 
 
 class CoreModel(BaseModel):
     """
     Any common logic to be shared by all models goes here.
     """
+
+
+class InputModel(CoreModel):
+    """
+    Every request body. Unknown fields are a 422, not silently dropped: a
+    typo'd or unsupported field must not look like it was accepted.
+    """
+
+    model_config = ConfigDict(extra="forbid")
 
 
 class DateTimeModelMixin(BaseModel):
